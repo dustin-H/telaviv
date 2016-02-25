@@ -3,11 +3,10 @@
 Describes an API-endpoint where data can be loaded.
 
 ## Format
-
 ```js
-var d = {
+{
   /**
-   * The name of the data-source for identification (needs to be uniq)
+   * The name of the DataSource for identification (needs to be uniq)
    */
   name: 'MySource',
   /**
