@@ -22,6 +22,12 @@ Describes the content which gets displayed on a certain path.
    */
   type: 'content',
   /**
+   * In case of `type === 'content'`
+   * `amp` is an array of content-objects
+   * See `data` for an example
+   */
+  amphtml: [],
+  /**
    * In case of `type === 'redirect'`
    * `data` is an object containing `url` and `code`
    */
