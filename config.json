@@ -1,0 +1,43 @@
+{
+	"routes": [{
+		"path": "/lol/:id",
+		"html5": [{
+			"component": "Header",
+			"data": {
+				"type": "REST",
+				"url": "/api/header"
+			}
+		}, {
+			"component": "Article",
+			"data": {
+				"type": "REST",
+				"url": "/api/article/:id"
+			}
+		}, {
+			"component": "Footer"
+		}],
+		"amphtml": [{
+			"component": "Header",
+			"data": {
+				"type": "REST",
+				"url": "/api/header"
+			}
+		}, {
+			"component": "Article",
+			"data": {
+				"type": "REST",
+				"url": "/api/article/:id"
+			}
+		}]
+	}],
+	"theme": "default",
+	"address": {
+		"api": "http://localhost:8000/",
+		"own": "http://localhost:8000/"
+	},
+	"errors": [{
+		"from": 400,
+		"to": 499,
+		"path": "/error/:code"
+	}]
+}
