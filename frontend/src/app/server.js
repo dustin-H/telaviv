@@ -6,23 +6,59 @@ import App from './containers/App.js'
 
 import createStore from './store/configureStore.js'
 import createInitialState from './createInitialState.js'
+import { getCache, reset } from '../utils/renderCache.js'
 
-import { LookRoot, Presets, StyleContainer } from 'react-look'
+import { set, get } from './store/store.js'
 
-export default (data, req, cb) => {
-  const state = createInitialState(data, req)
-  const store = createStore(state)
-  const content = renderToString(
-    <LookRoot config={Presets['react-dom']}>
-        <Provider store={store}>
-           <App />
+import { LookRoot, Presets, StyleSheet } from 'react-look'
+var serverConfig = Presets['react-dom']
+serverConfig.styleElementId = '_look'
+
+export default (data, req, res) => {
+  try {
+    const state = createInitialState(data, req)
+    const store = createStore(state)
+
+    set(store)
+    reset()
+
+    const content = renderToString(
+      <LookRoot config={ serverConfig }>
+        <Provider store={ store }>
+          <App />
         </Provider>
-     </LookRoot>
-  )
+      </LookRoot>
+    )
+    var cache = getCache()
 
+    const styles = StyleSheet.renderToString(serverConfig.prefixer)
+    const newState = store.getState()
 
-  const styles = StyleContainer.renderStaticStyles(req.get('user-agent'))
-  const newState = store.getState()
+    var renderData = {
+      content: content,
+      styles: styles,
+      state: newState
+    }
 
-  cb(content, styles, newState)
+    if (cache.title != null) {
+      renderData.title = cache.title
+    }
+
+    if (cache.head != null) {
+      renderData.head = cache.head
+    }
+
+    if (cache.redirect != null) {
+      if (cache.redirectCode == null) {
+        res.redirect(cache.redirect)
+      } else {
+        res.redirect(cache.redirectCode, cache.redirect)
+      }
+      return null
+    } else {
+      return renderData
+    }
+  } catch ( e ) {
+    console.error(e.stack)
+  }
 }

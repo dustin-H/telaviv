@@ -1,5 +1,6 @@
 
 import { generateObjectHash } from '../utils/hash.js'
+import config from '../config'
 
 export default function create(data, req) {
   for (var i in data) {
@@ -8,13 +9,12 @@ export default function create(data, req) {
 
   var state = {
     content: {
-      data: data
-    },
-    router: {
+      data: data,
       location: {
         pathname: req.path
       }
-    }
+    },
+    config: config
   }
   return state
 }

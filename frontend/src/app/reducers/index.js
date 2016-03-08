@@ -1,8 +1,10 @@
-import { combineReducers } from 'redux';
-import content from './content.js';
+import { combineReducers } from 'redux'
+import content from './content.js'
+import config from './config.js'
 
 const rootReducer = combineReducers({
-  content
+  content,
+  config
 });
 
 export default rootReducer;

@@ -1,5 +1,10 @@
 
-import configureStore from './configureStore.js'
+var store = {}
 
-const store = configureStore(__GLOBAL_INITIAL_REDUX_STATE__ || null);
-export default store;
+export function set(s) {
+  store = s
+}
+
+export function get() {
+  return store
+}
