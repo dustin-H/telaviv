@@ -36,8 +36,8 @@
 		"own": "http://localhost:8000/"
 	},
 	"errors": [{
-		"from": 400,
-		"to": 499,
-		"path": "/error/:code"
+		"from": 401,
+		"to": 401,
+		"path": "/lol/login"
 	}]
 }
