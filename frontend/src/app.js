@@ -1,49 +1,49 @@
 var express = require('express')
-var path = require('path')
-var config = require('./config')
-var matchRoutes = require('./router/matchRoutes.js')
 
-var render = require('./render')
-var redirect = require('./render/redirect.js')
+import init from './middleware/init.js'
+import router from './middleware/router.js'
+import routeTypeParser from './middleware/routeTypeParser.js'
+import redirect from './middleware/redirect.js'
+import prepareRouteFetch from './middleware/prepareRouteFetch.js'
+import fetch from './middleware/fetch.js'
+import renderReact from './middleware/renderReact.js'
+import generateHtml from './middleware/generateHtml.js'
+import respond from './middleware/respond.js'
 
-var templates = require('./templates')
+import prepareErrorFetch from './middleware/prepareErrorFetch.js'
+import catchErrors from './middleware/catchErrors.js'
+
+const errorHandler = (middleware) => {
+  return (err, req, res, next) => {
+    middleware(req, res, (error) => {
+      next(error || err)
+    }, err)
+  }
+}
 
 module.exports = function() {
   var app = express()
 
-  app.use(templates)
   app.use('/.statics', function(req, res, next) {
     next();
   })
-  app.use(function(req, res, next) {
-    req.bauhaus = req.bauhaus || {}
-    req.bauhaus.time = process.hrtime();
-    req.bauhaus.canonical = path.join(config.address.own, req.path)
-    var route = matchRoutes(config.routes, req.path)
-    if (route === false) {
-      return res.status(404).send('Not found!')
-    }
-    if (route.route.redirect != null) {
-      return redirect(route, req, res)
-    }
-    if (route.route.html5 != null && route.route.amphtml != null) {
-      req.bauhaus.ampAndHtml5 = true
-      if (req.query.amp === 1 || req.query.amp === '1' || req.query.amp === true || req.query.amp === 'true') {
-        return render('amphtml', route, req, res, next)
-      } else {
-        req.bauhaus.amphtml = req.bauhaus.canonical + '?amp=1'
-        req.bauhaus.canonical = null
-        return render('html5', route, req, res, next)
-      }
-    }
-    if (route.route.html5 != null) {
-      return render('html5', route, req, res, next)
-    }
-    if (route.route.amphtml != null) {
-      return render('amphtml', route, req, res, next)
-    }
-    next();
-  })
+
+  app.use(init())
+  app.use(router())
+  app.use(routeTypeParser())
+  app.use(redirect())
+  app.use(prepareRouteFetch())
+  app.use(fetch())
+  app.use(renderReact())
+  app.use(generateHtml())
+  app.use(respond())
+
+  app.use(errorHandler(prepareErrorFetch()))
+  app.use(errorHandler(fetch()))
+  app.use(errorHandler(renderReact()))
+  app.use(errorHandler(catchErrors()))
+  app.use(errorHandler(generateHtml()))
+  app.use(errorHandler(respond()))
 
   return app;
 }

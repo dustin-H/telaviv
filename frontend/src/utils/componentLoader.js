@@ -1,8 +1,5 @@
 
-var isServer = true;
-if (typeof __GLOBAL_INITIAL_REDUX_STATE__ !== 'undefined') {
-  isServer = false;
-}
+import isServer from './isServer.js'
 
 export default function(name) {
   if (isServer === true) {

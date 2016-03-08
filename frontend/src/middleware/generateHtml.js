@@ -1,15 +1,16 @@
 
 var _ = require('lodash')
 var fs = require('fs')
-var amp = _.template(fs.readFileSync(require.resolve('../../templates/amp.html')))
+var amphtml = _.template(fs.readFileSync(require.resolve('../../templates/amp.html')))
 var html5 = _.template(fs.readFileSync(require.resolve('../../templates/html5.html')))
 var error = _.template(fs.readFileSync(require.resolve('../../templates/error.html')))
 var config = require('../config');
 var HttpStatus = require('http-status-codes')
 
-module.exports = function(req, res, next) {
-  res.bauhaus = res.bauhaus || {}
-  res.bauhaus.renderHTML = function(type, data) {
+export default function() {
+  return (req, res, next) => {
+    let type = req.bauhaus.type
+    let data = req.bauhaus.renderData
 
     if(data.head == null){
       data.head = ''
@@ -30,7 +31,7 @@ module.exports = function(req, res, next) {
       data.head += '<script>__GLOBAL_INITIAL_REDUX_STATE__='+JSON.stringify(data.state)+'</script>\n'
     }
     if(data.styles != null){
-      data.head += '<style amp-custom>'+data.styles+'</style>\n'
+      data.head += '<style id="_look" amp-custom>'+data.styles+'</style>\n'
     }
 
     var d = generate(Object.assign({}, data, {
@@ -38,22 +39,20 @@ module.exports = function(req, res, next) {
       amphtml: req.bauhaus.amphtml
     }))
 
-    var diff = process.hrtime(req.bauhaus.time);
-    console.log('GET:', req.path, 'in', diff[1]/1000000, 'Milliseconds!')
-
     if(type === 'amphtml'){
-      return res.send(amp(d))
+      req.bauhaus.html = amphtml(d);
+      return next()
     }
-    res.send(html5(d))
+    req.bauhaus.html = html5(d);
+    return next()
   }
-  next();
 }
 
 var generate = function(data) {
   var d = {
     head: '',
-    title: config.title || 'No content!',
-    content: '204: No content!',
+    title: config.title || 'No title!',
+    content: data.content || '204: No content!',
     links: ''
   }
 
@@ -65,11 +64,6 @@ var generate = function(data) {
   }
   if (data.head != null) {
     d.head += data.head
-  }
-  if (data.content != null) {
-    d.content = data.content
-  } else {
-    res.status(204)
   }
   if (data.title != null) {
     d.title = data.title

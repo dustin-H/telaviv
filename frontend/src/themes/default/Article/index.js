@@ -4,6 +4,14 @@ import look, { StyleSheet } from 'react-look'
 class Header extends Component {
   render() {
     const {data, actions} = this.props
+    this.context.bauhaus.setTitle('Article: '+data.id)
+    if (data.id === 'alli') {
+      this.context.bauhaus.changeLocation('/lol/alligatoah')
+    }
+    if (data.id === 'google') {
+      this.context.bauhaus.changeLocation('http://www.google.de/')
+    }
+
     return (
       <article className={styles.article}>{JSON.stringify(data)}</article>
     )
@@ -12,5 +20,7 @@ class Header extends Component {
 
 import styleSheet from './style.js'
 var styles = StyleSheet.create(styleSheet)
+
+Header.contextTypes = {bauhaus: React.PropTypes.object};
 
 export default look(Header)
