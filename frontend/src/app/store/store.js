@@ -2,7 +2,7 @@
 var store = {}
 
 export function set(s) {
-  store = s
+  Object.assign(store, s)
 }
 
 export function get() {
