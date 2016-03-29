@@ -11,16 +11,23 @@ config.update({lala: 'Größenwahn!'}, function(err) {
 
 var express = require('express')
 var app = express()
+//var morgan = require('morgan')
+
+var config = require('./config.json')
 
 var bauhaus = require('./frontend/build/app.js');
 var testapi = require('./testapi.js');
 
-app.listen(8000)
+app.listen(8000, function(){
+  console.log('STARTED!');
+})
+
+//app.use(morgan('combined'))
 
 app.use('/api', testapi())
 
-app.use(bauhaus())
+app.use(bauhaus(config))
 
 app.use(function(req, res, next){
-  res.status(404).send('Bauhaus Failed 404')
+  res.status(500).send('Bauhaus Failed 500')
 })
