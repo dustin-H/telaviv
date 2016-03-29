@@ -3,6 +3,12 @@ var express = require('express')
 module.exports = function() {
   var app = express()
 
+  /*app.use(function(req, res, next){
+    setTimeout(function(){
+      next()
+    }, 2000)
+  })*/
+
   app.get('/header', function(req, res) {
     //res.cookie('rememberme', '1');
     //res.set('Cache-Control', 'max-age=300')
