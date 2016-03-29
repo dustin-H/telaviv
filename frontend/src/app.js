@@ -1,4 +1,4 @@
-var express = require('express')
+import express from 'express'
 
 import init from './middleware/init.js'
 import router from './middleware/router.js'
@@ -13,6 +13,11 @@ import respond from './middleware/respond.js'
 import prepareErrorFetch from './middleware/prepareErrorFetch.js'
 import catchErrors from './middleware/catchErrors.js'
 
+import config from './config'
+import setConfig from './config/setConfig.js'
+
+import staticProvider from './staticProvider'
+
 const errorHandler = (middleware) => {
   return (err, req, res, next) => {
     middleware(req, res, (error) => {
@@ -21,29 +26,28 @@ const errorHandler = (middleware) => {
   }
 }
 
-module.exports = function() {
+module.exports = function(c) {
+  setConfig(c)
   var app = express()
 
-  app.use('/.statics', function(req, res, next) {
-    next();
-  })
+  app.use('/.static', staticProvider())
 
-  app.use(init())
-  app.use(router())
-  app.use(routeTypeParser())
-  app.use(redirect())
-  app.use(prepareRouteFetch())
-  app.use(fetch())
-  app.use(renderReact())
-  app.use(generateHtml())
-  app.use(respond())
+  app.use(init(config))
+  app.use(router(config))
+  app.use(routeTypeParser(config))
+  app.use(redirect(config))
+  app.use(prepareRouteFetch(config))
+  app.use(fetch(config))
+  app.use(renderReact(config))
+  app.use(generateHtml(config))
+  app.use(respond(config))
 
-  app.use(errorHandler(prepareErrorFetch()))
-  app.use(errorHandler(fetch()))
-  app.use(errorHandler(renderReact()))
-  app.use(errorHandler(catchErrors()))
-  app.use(errorHandler(generateHtml()))
-  app.use(errorHandler(respond()))
+  app.use(errorHandler(prepareErrorFetch(config)))
+  app.use(errorHandler(fetch(config)))
+  app.use(errorHandler(renderReact(config)))
+  app.use(errorHandler(catchErrors(config)))
+  app.use(errorHandler(generateHtml(config)))
+  app.use(errorHandler(respond(config)))
 
   return app;
 }
