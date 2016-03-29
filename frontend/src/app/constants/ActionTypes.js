@@ -1,3 +1,4 @@
 
-// Example
-export const EXAMPLE_SYNC = 'EXAMPLE_SYNC';
+// Content
+export const CONTENT_LOCATION_CHANGED = 'CONTENT_LOCATION_CHANGED';
+export const CONTENT_SET_LOADING = 'CONTENT_SET_LOADING';
