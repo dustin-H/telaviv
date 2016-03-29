@@ -12,9 +12,12 @@ export default function create(data, req) {
       data: data,
       location: {
         pathname: req.path
-      }
+      },
+      loading: false
     },
-    config: config
+    config: {
+      routes: config.clientRoutes
+    }
   }
   return state
 }
