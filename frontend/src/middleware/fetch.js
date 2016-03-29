@@ -1,19 +1,6 @@
 
 import fetch from '../fetch'
-import { generateObjectHash } from '../utils/hash.js'
-
-const combineFetchData = (content, data) => {
-  var out = [];
-  for(var i in content){
-    var obj = {};
-    obj.component = content[i].component
-    obj.data = data[content[i].component]
-    obj.key = generateObjectHash(obj)
-    out.push(obj)
-  }
-  return out;
-}
-
+import combineFetchData from '../utils/combineFetchData.js'
 
 export default function() {
   return (req, res, next) => {
