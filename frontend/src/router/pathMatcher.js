@@ -67,7 +67,7 @@ function _compilePattern(pattern) {
 
 var CompiledPatternsCache = {}
 
-function compilePattern(pattern) {
+export function compilePattern(pattern) {
   if (!(pattern in CompiledPatternsCache))
     CompiledPatternsCache[pattern] = _compilePattern(pattern)
 
