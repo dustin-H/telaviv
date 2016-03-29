@@ -1,8 +1,4 @@
 
-var style = {
-  header: {
-    color: 'red'
-  }
-}
+var style = {header: {color: 'red'}}
 
 export default style

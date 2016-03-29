@@ -1,10 +1,10 @@
 import React, { PropTypes, Component } from 'react'
 import look, { StyleSheet } from 'react-look'
 
-class Header extends Component {
+class Article extends Component {
   render() {
     const {data, actions} = this.props
-    this.context.bauhaus.setTitle('Article: '+data.id)
+    this.context.bauhaus.setTitle('Article: ' + data.id)
     if (data.id === 'alli') {
       this.context.bauhaus.changeLocation('/lol/alligatoah')
     }
@@ -13,7 +13,9 @@ class Header extends Component {
     }
 
     return (
-      <article className={styles.article}>{JSON.stringify(data)}</article>
+      <article className={ styles.article }>
+        { JSON.stringify(data) }
+      </article>
     )
   }
 }
@@ -21,6 +23,6 @@ class Header extends Component {
 import styleSheet from './style.js'
 var styles = StyleSheet.create(styleSheet)
 
-Header.contextTypes = {bauhaus: React.PropTypes.object};
+Article.contextTypes = {bauhaus: React.PropTypes.object};
 
-export default look(Header)
+export default look(Article)
