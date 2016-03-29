@@ -7,3 +7,4 @@ routing/temp.js
 frontend/build*
 frontend/client-build*
 frontend/.moduleCreators*
+coverage
