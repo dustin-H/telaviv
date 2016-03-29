@@ -1,4 +1,37 @@
-import React, { Component } from 'react'
+
+/*
+This is a modified version of [react-router Link](https://github.com/reactjs/react-router/blob/master/modules/Link.js)
+
+Thanks to all contributors!
+
+Great work!
+
+
+
+LICENSE:
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Ryan Florence, Michael Jackson
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify,
+ merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+import React from 'react'
+import look from 'react-look'
+
+const {bool, object, string, func, oneOfType} = React.PropTypes
 
 function isLeftClickEvent(event) {
   return event.button === 0
@@ -9,63 +42,72 @@ function isModifiedEvent(event) {
 }
 
 function isEmptyObject(object) {
-  for (let p in object)
-    if (object.hasOwnProperty(p))
+  for (let p in object) {
+    if (object.hasOwnProperty(p)) {
       return false
+    }
+  }
 
   return true
 }
 
-function createLocationDescriptor(to, { query, hash, state }) {
-  if (query || hash || state) {
-    return { pathname: to, query, hash, state }
-  }
+/**
+ * A <Link> is used to create an <a> element that links to a route.
+ * When that route is active, the link gets the value of its
+ * activeClassName prop.
+ *
+ * For example, assuming you have the following route:
+ *
+ *   <Route path="/posts/:postID" component={Post} />
+ *
+ * You could use the following component to link to that route:
+ *
+ *   <Link to={`/posts/${post.id}`} />
+ *
+ * Links may pass along location state and/or query string parameters
+ * in the state/query props, respectively.
+ *
+ *   <Link ... query={{ show: true }} state={{ the: 'state' }} />
+ */
+const Link = React.createClass({
 
-  return to
-}
-
-class Link extends Component{
-
-  /*contextTypes: {
-    router: object
+  contextTypes: {
+    bauhaus: object
   },
 
   propTypes: {
-    to: oneOfType([ string, object ]).isRequired,
-    query: object,
-    hash: string,
-    state: object,
+    to: oneOfType([string]).isRequired,
     activeStyle: object,
     activeClassName: string,
-    onlyActiveOnIndex: bool.isRequired,
     onClick: func
-  },*/
+  },
 
   getDefaultProps() {
-    return {
-      onlyActiveOnIndex: false,
-      className: '',
-      style: {}
-    }
-  }
+    return {className: '', style: {}}
+  },
 
   handleClick(event) {
+    console.log('cl', event);
     let allowTransition = true
 
-    if (this.props.onClick)
+    if (this.props.onClick) {
       this.props.onClick(event)
+    }
 
-    if (isModifiedEvent(event) || !isLeftClickEvent(event))
+    if (isModifiedEvent(event) || !isLeftClickEvent(event)) {
       return
+    }
 
-    if (event.defaultPrevented === true)
+    if (event.defaultPrevented === true) {
       allowTransition = false
+    }
 
     // If target prop is set (e.g. to "_blank") let browser handle link.
     /* istanbul ignore if: untestable with Karma */
     if (this.props.target) {
-      if (!allowTransition)
+      if (!allowTransition) {
         event.preventDefault()
+      }
 
       return
     }
@@ -73,17 +115,37 @@ class Link extends Component{
     event.preventDefault()
 
     if (allowTransition) {
-      const { to, query, hash, state } = this.props
-      const location = createLocationDescriptor(to, { query, hash, state })
+      const {to} = this.props
 
-      this.context.router.push(location)
+      this.context.bauhaus.changeLocation(to)
     }
-  }
+  },
 
   render() {
+    const {to, activeClassName, activeStyle, ...props} = this.props
 
+    // Ignore if rendered outside the context of router, simplifies unit testing.
+    const {bauhaus} = this.context
+    props.href = to
+
+    if (activeClassName || (activeStyle != null && !isEmptyObject(activeStyle))) {
+      if (bauhaus.isActive(to)) {
+        if (activeClassName) {
+          props.className += props.className === '' ? activeClassName : ` ${activeClassName}`
+        }
+
+        if (activeStyle) {
+          props.style = {
+            ...props.style,
+            ...activeStyle
+          }
+        }
+      }
+    }
+
+    return <a {...props} onClick={ this.handleClick } />
   }
 
-}
+})
 
-export default Link
+export default look(Link)
