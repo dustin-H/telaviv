@@ -1,5 +1,6 @@
 var webpack = require('webpack')
 var fs = require('fs')
+var ClientServerResolver = require('./ClientServerResolver.js');
 
 var productionPlugin = new webpack.DefinePlugin({
   'process.env.NODE_ENV': '"' + process.env.NODE_ENV + '"'
@@ -49,6 +50,9 @@ var config = [{
   externals: [{
     'inline-style-linter': 'true'
   }],
+  resolve: {
+    packageAlias: 'browser'
+  },
   module: {
     loaders: [{
       test: /\.js$/,
@@ -67,7 +71,7 @@ for (var i in modules) {
   // var modulePath = modulesPath + '/' + name + '/index.js'
   // var reqModulePath = modulesPath + '/' + modulePath + '/index.js'
   var creatorPath = moduleCreatorsPath + '/' + mod.name + '-' + mod.theme + '.js'
-  var src = '__GLOBAL__.exportDefault = require("' + mod.path + '").default'
+  var src = '__GLOBAL__.exportDefault = require("' + mod.path + '")'
   fs.writeFileSync(creatorPath, src)
 
   config.push({
