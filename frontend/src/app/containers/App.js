@@ -1,6 +1,6 @@
-import React, {Component, PropTypes} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Content from '../components/Content';
 
 import * as content from '../actions/content.js';
@@ -12,7 +12,7 @@ class App extends Component {
       content: bindActionCreators(content, dispatch)
     }
 
-    return (<Content state={state} actions={actions}/>);
+    return (<Content state={ state } actions={ actions } />);
   }
 }
 
