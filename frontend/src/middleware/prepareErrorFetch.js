@@ -1,11 +1,10 @@
 
 import url from 'url'
-import config from '../config'
 
 import { replaceAll } from '../utils/replace.js'
 import matchRoutes from '../router/matchRoutes.js'
 
-const getErrorRoute = (code, requiredContent) => {
+const getErrorRoute = (code, requiredContent, config) => {
   for (var i in config.errors) {
     var e = config.errors[i]
     if (code >= e.from && code <= e.to) {
@@ -19,7 +18,7 @@ const getErrorRoute = (code, requiredContent) => {
   return null
 }
 
-export default function() {
+export default function(config) {
   return (req, res, next) => {
     if(res.statusCode === 200){
       res.status(500)
@@ -39,7 +38,7 @@ export default function() {
       }
     }
 
-    let errorRoute = getErrorRoute(res.statusCode, req.bauhaus.type)
+    let errorRoute = getErrorRoute(res.statusCode, req.bauhaus.type, config)
     if (errorRoute != null) {
       req.bauhaus.fetch = {
         components: errorRoute.route[req.bauhaus.type],

@@ -1,7 +1,6 @@
 
 export default function() {
   return (req, res, next) => {
-    console.log('Redirect');
     if (req.bauhaus.type !== 'redirect') {
       return next()
     }

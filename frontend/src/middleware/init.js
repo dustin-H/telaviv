@@ -1,13 +1,16 @@
 
 import url from 'url'
-import config from '../config'
 
-export default function() {
+export default function(config) {
   return (req, res, next) => {
     req.bauhaus = req.bauhaus || {}
-    req.bauhaus.time = process.hrtime()
+
+    /* istanbul ignore if */
+    if (process.env.NODE_ENV === 'development') {
+      req.bauhaus.timetracking = {start: process.hrtime()}
+    }
+
     req.bauhaus.canonical = url.resolve(config.address.own, req.path)
-    res.bauhaus = res.bauhaus || {}
     next()
   }
 }
