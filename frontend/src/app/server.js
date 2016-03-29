@@ -11,11 +11,18 @@ import { getCache, reset } from '../utils/renderCache.js'
 import { set, get } from './store/store.js'
 
 import { LookRoot, Presets, StyleSheet } from 'react-look'
+import { plugin, renderToString as lookRenderToString } from './lookServerRendering.js'
+
 var serverConfig = Presets['react-dom']
 serverConfig.styleElementId = '_look'
+serverConfig.plugins.push(plugin)
 
 export default (data, req, res) => {
   try {
+
+    if (req.bauhaus.timetracking != null) {
+      var renderStart = process.hrtime()
+    }
     const state = createInitialState(data, req)
     const store = createStore(state)
 
@@ -31,8 +38,14 @@ export default (data, req, res) => {
     )
     var cache = getCache()
 
-    const styles = StyleSheet.renderToString(serverConfig.prefixer)
+    // const styles = StyleSheet.renderToString(serverConfig.prefixer)
+    const styles = lookRenderToString(serverConfig.prefixer)
+
     const newState = store.getState()
+
+    if (req.bauhaus.timetracking != null) {
+      req.bauhaus.timetracking.reactRenderTime = process.hrtime(renderStart)[1] / 1000000
+    }
 
     var renderData = {
       content: content,
