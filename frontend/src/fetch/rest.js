@@ -1,11 +1,16 @@
 
-var superagent = require('superagent')
-var parseCacheControl = require('parse-cache-control')
-var url = require('url');
-import config from '../config'
+import superagent from 'superagent'
+import parseCacheControl from 'parse-cache-control'
+import url from 'url'
 import { replaceAllParams } from '../utils/replace.js'
 
 var generateCacheHeader = function(c) {
+  if (c.noStore === true && c.noCache === true) {
+    return 'no-cache, no-store'
+  }
+  if (c.noCache === true) {
+    return 'no-cache'
+  }
   if (c.noStore === true) {
     return 'no-store'
   }
@@ -22,7 +27,7 @@ var generateCacheHeader = function(c) {
   return ret.join(', ')
 }
 
-module.exports = function(fetch, req, res, cb) {
+export default (fetch, req, res, config, cb) => {
   var components = fetch.components
   var params = fetch.params
   var k = 0
@@ -30,16 +35,13 @@ module.exports = function(fetch, req, res, cb) {
   var mostImportantError = null
   var header = {cache: {}, cookie: []}
 
-  var response = function(component, err, superres) {
+  let response = (component, err, superres) => {
     k--
     if (err != null) {
       if (mostImportantError == null) {
         mostImportantError = err
       } else {
-        if (err.status >= 500 && err.status < 600 && err.status < mostImportantError.status) {
-          mostImportantError = err
-        }
-        if (err.status >= 400 && err.status < 500 && err.status < mostImportantError.status) {
+        if (err.status >= 400 && err.status < 600 && err.status < mostImportantError.status) {
           mostImportantError = err
         }
       }
@@ -62,14 +64,14 @@ module.exports = function(fetch, req, res, cb) {
           if (cache['no-cache'] === true) {
             header.cache.noCache = true
           }
+          if (cache['no-store'] === true) {
+            header.cache.noStore = true
+          }
         }
       }
 
       if (superres.header['set-cookie'] != null) {
         var cookieArray = superres.header['set-cookie']
-        if (typeof cookieArray === 'string') {
-          cookieArray = [cookieArray]
-        }
         header.cookie = header.cookie.concat(superres.header['set-cookie'])
       }
     }
@@ -89,12 +91,12 @@ module.exports = function(fetch, req, res, cb) {
     }
   }
 
-  var request = function(component) {
+  let request = (component) => {
     if (component.data != null && component.data.url != null) {
       k++
       var requestUrl = url.resolve(config.address.api, component.data.url)
       requestUrl = replaceAllParams(requestUrl, params)
-      superagent.get(requestUrl).set(req.headers).accept('json').end(function(err, superres) {
+      superagent.get(requestUrl).set(req.headers).accept('json').end((err, superres) => {
         response(component, err, superres)
       })
     }

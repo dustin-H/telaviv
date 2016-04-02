@@ -2,15 +2,14 @@
 import fetch from '../fetch'
 import combineFetchData from '../utils/combineFetchData.js'
 
-export default function() {
+export default (config) => {
   return (req, res, next) => {
     if (req.bauhaus.fetch == null) {
-      return next(true)
+      return next(500)
     }
-    fetch(req.bauhaus.fetch, req, res, function(err, data) {
+    fetch(req.bauhaus.fetch, req, res, config, function(err, data) {
       if (err != null) {
-        res.status(err.status)
-        return next(err)
+        return next(err.status)
       }
       req.bauhaus.fetch.data = combineFetchData(req.bauhaus.fetch.components, data)
       next()

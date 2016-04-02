@@ -1,7 +1,7 @@
 
-var rest = require('./rest.js')
+import rest from './rest.js'
 
-module.exports = function(fetch, req, res, cb){
+export default (fetch, req, res, config, cb) => {
   // Because there is only REST
-  rest(fetch, req, res, cb)
+  rest(fetch, req, res, config, cb)
 }
