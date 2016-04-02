@@ -44,7 +44,7 @@ export function mockRequestForRedirect(type, url, code) {
       type: type,
       route: {
         route: {
-          redirect:{
+          redirect: {
             url: url
           }
         }
@@ -55,4 +55,49 @@ export function mockRequestForRedirect(type, url, code) {
     req.bauhaus.route.route.redirect.code = code
   }
   return req
+}
+export function mockRequestForPrepareRouteFetch(type, components, params) {
+  let req = {
+    bauhaus: {
+      type: type,
+      route: {
+        params: params,
+        route: {}
+      }
+    }
+  }
+  req.bauhaus.route.route[type] = components
+  return req
+}
+export function mockRequestForPrepareErrorFetch(type) {
+  let req = {bauhaus: {type: type}}
+  return req
+}
+export function mockResponseForPrepareErrorFetch(code) {
+  let res = {
+    status: (code) => {
+      res.statusCode = code
+    },
+    statusCode: code
+  }
+  return res
+}
+export function mockConfigForPrepareErrorFetch(component) {
+  return {
+    routes: [{
+      path: '/error/:code',
+      html5: [{
+        component: component
+      }]
+    }],
+    errors: [{
+      from: 404,
+      to: 404,
+      path: '/error/:code'
+    }, {
+      from: 500,
+      to: 500,
+      path: '/errors/:code'
+    }]
+  }
 }
