@@ -1,8 +1,7 @@
 
 import { generateObjectHash } from '../utils/hash.js'
-import config from '../config'
 
-export default function create(data, req) {
+export default function create(data, req, config) {
   for (var i in data) {
     data[i].key = generateObjectHash(data[i])
   }
@@ -16,7 +15,8 @@ export default function create(data, req) {
       loading: false
     },
     config: {
-      routes: config.clientRoutes
+      routes: config.clientRoutes,
+      components: config.components
     }
   }
   return state

@@ -1,6 +1,8 @@
 var webpack = require('webpack')
 var fs = require('fs')
-var ClientServerResolver = require('./ClientServerResolver.js');
+var ClientServerResolver = require('./ClientServerResolver.js')
+var _ = require('lodash')
+var moduleLoaderTemplate = _.template(fs.readFileSync(require.resolve('./moduleLoaderTemplate.js')))
 
 var productionPlugin = new webpack.DefinePlugin({
   'process.env.NODE_ENV': '"' + process.env.NODE_ENV + '"'
@@ -71,7 +73,8 @@ for (var i in modules) {
   // var modulePath = modulesPath + '/' + name + '/index.js'
   // var reqModulePath = modulesPath + '/' + modulePath + '/index.js'
   var creatorPath = moduleCreatorsPath + '/' + mod.name + '-' + mod.theme + '.js'
-  var src = '__GLOBAL__.exportDefault = require("' + mod.path + '")'
+  // var src = 'var c = __GLOBAL__.INITIAL_STATE.config.components; var r = require("react-look-scope"); var t = r.getClassNameScope(); r.setClassNameScope(c["'++'"]); __GLOBAL__.exportDefault = require("' + mod.path + '")'
+  var src = moduleLoaderTemplate(mod)
   fs.writeFileSync(creatorPath, src)
 
   config.push({
@@ -88,9 +91,21 @@ for (var i in modules) {
         react: 'bauhaus-ui-module-utils/npm/react',
         'react-dom': 'bauhaus-ui-module-utils/npm/react-dom',
         'react-look': 'bauhaus-ui-module-utils/npm/react-look',
-        superagent: 'bauhaus-ui-module-utils/npm/superagent'
+        superagent: 'bauhaus-ui-module-utils/npm/superagent',
+        'react-look-scope': 'react-look-scope'
       }
     },
+    externals: [{
+      react: 'var __GLOBAL__.npm.react',
+      'react-look': 'var __GLOBAL__.npm["react-look"]',
+      /*'react/lib/ReactTransitionGroup': 'var __GLOBAL__.npm["react-lib-ReactTransitionGroup"]',
+      'react/lib/update': 'var __GLOBAL__.npm["react-lib-update"]',
+      'react/lib/ReactComponentWithPureRenderMixin': 'var __GLOBAL__.npm["react-lib-ReactComponentWithPureRenderMixin"]',
+      'react/lib/ReactFragment': 'var __GLOBAL__.npm["react-lib-ReactFragment"]',*/
+      'react-dom': 'var __GLOBAL__.npm["react-dom"]',
+      superagent: 'var __GLOBAL__.npm["superagent"]',
+      'react-look-scope': 'var __GLOBAL__.npm["react-look-scope"]'
+    }],
     module: {
       loaders: [{
         test: /\.js$/,

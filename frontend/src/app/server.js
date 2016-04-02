@@ -11,67 +11,67 @@ import { getCache, reset } from '../utils/renderCache.js'
 import { set, get } from './store/store.js'
 
 import { LookRoot, Presets, StyleSheet } from 'react-look'
-import { plugin, renderToString as lookRenderToString } from './lookServerRendering.js'
+import { plugin, renderToString as lookRenderToString } from 'react-look-server-rendering'
+import { setClassNameScope } from 'react-look-scope'
 
 var serverConfig = Presets['react-dom']
 serverConfig.styleElementId = '_look'
 serverConfig.plugins.push(plugin)
 
-export default (data, req, res) => {
-  try {
+setClassNameScope('g')
 
-    if (req.bauhaus.timetracking != null) {
-      var renderStart = process.hrtime()
-    }
-    const state = createInitialState(data, req)
-    const store = createStore(state)
+export default (data, req, res, config) => {
+  /* istanbul ignore if */
+  if (req.bauhaus.timetracking != null) {
+    var renderStart = process.hrtime()
+  }
+  const state = createInitialState(data, req, config)
+  const store = createStore(state)
 
-    set(store)
-    reset()
+  set(store)
+  reset()
 
-    const content = renderToString(
-      <LookRoot config={ serverConfig }>
-        <Provider store={ store }>
-          <App />
-        </Provider>
-      </LookRoot>
-    )
-    var cache = getCache()
+  const content = renderToString(
+    <LookRoot config={ serverConfig }>
+      <Provider store={ store }>
+        <App />
+      </Provider>
+    </LookRoot>
+  )
+  var cache = getCache()
 
-    // const styles = StyleSheet.renderToString(serverConfig.prefixer)
-    const styles = lookRenderToString(serverConfig.prefixer)
+  // const styles = StyleSheet.renderToString(serverConfig.prefixer)
+  const styles = lookRenderToString(serverConfig.prefixer)
 
-    const newState = store.getState()
+  const newState = store.getState()
 
-    if (req.bauhaus.timetracking != null) {
-      req.bauhaus.timetracking.reactRenderTime = process.hrtime(renderStart)[1] / 1000000
-    }
+  /* istanbul ignore if */
+  if (req.bauhaus.timetracking != null) {
+    req.bauhaus.timetracking.reactRenderTime = process.hrtime(renderStart)[1] / 1000000
+  }
 
-    var renderData = {
-      content: content,
-      styles: styles,
-      state: newState
-    }
+  var renderData = {
+    content: content,
+    styles: styles,
+    state: newState
+  }
 
-    if (cache.title != null) {
-      renderData.title = cache.title
-    }
+  if (cache.title != null) {
+    renderData.title = cache.title
+  }
 
-    if (cache.head != null) {
-      renderData.head = cache.head
-    }
+  if (cache.head != null) {
+    renderData.head = cache.head
+  }
 
-    if (cache.redirect != null) {
-      if (cache.redirectCode == null) {
-        res.redirect(cache.redirect)
-      } else {
-        res.redirect(cache.redirectCode, cache.redirect)
-      }
-      return null
+  if (cache.redirect != null) {
+    if (cache.redirectCode == null) {
+      res.redirect(cache.redirect)
     } else {
-      return renderData
+      res.redirect(cache.redirectCode, cache.redirect)
     }
-  } catch ( e ) {
-    console.error(e.stack)
+    return null
+  } else {
+    return renderData
   }
 }

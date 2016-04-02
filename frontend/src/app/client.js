@@ -9,8 +9,11 @@ import { LookRoot, Presets } from 'react-look'
 import createStore from './store/configureStore.js'
 import { ensureComponents } from './loader'
 import { set, get } from './store/store.js'
+import { setClassNameScope } from 'react-look-scope'
 
-const store = createStore(__GLOBAL_INITIAL_REDUX_STATE__ || null);
+setClassNameScope('g')
+
+const store = createStore(__GLOBAL__.INITIAL_STATE || null);
 
 set(store)
 
