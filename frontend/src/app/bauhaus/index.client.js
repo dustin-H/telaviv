@@ -6,13 +6,10 @@ const IS_SERVER = false
 const IS_CLIENT = true
 export { IS_SERVER };
 export { IS_CLIENT };
+export { reload };
 
 export function setTitle(title) {
   document.title = title
-}
-
-export function addToHead(html) {
-  console.warn('`bauhaus.addToHead()` only works on the server-side!')
 }
 
 export function changeLocation(to, code) {
@@ -24,10 +21,10 @@ export function changeLocation(to, code) {
   }
 }
 
-export function reload() {
+export function isLoading() {
   let store = get()
   let state = store.getState()
-  pushLocation(state.content.location)
+  return state.content.loading || false
 }
 
 export function isActive(href) {
