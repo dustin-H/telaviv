@@ -1,4 +1,4 @@
 {
-	"main": "index.server.js",
+	"main": "index.js",
 	"browser": "index.client.js"
 }
