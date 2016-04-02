@@ -1,51 +1,23 @@
 
-import url from 'url'
-
-import { replaceAll } from '../utils/replace.js'
-import matchRoutes from '../router/matchRoutes.js'
-
-const getErrorRoute = (code, requiredContent, config) => {
-  for (var i in config.errors) {
-    var e = config.errors[i]
-    if (code >= e.from && code <= e.to) {
-      let path = replaceAll(e.path, ':code', code)
-      let route = matchRoutes(config.routes, path)
-      if (route.route[requiredContent] != null) {
-        return route
-      }
-    }
-  }
-  return null
-}
+import matchErrorRoutes from '../router/matchErrorRoutes.js'
 
 export default function(config) {
-  return (req, res, next) => {
+  return (req, res, next, err) => {
+    if(typeof err === 'number' && err >= 400 && err < 600){
+      res.status(err)
+    }
     if(res.statusCode === 200){
       res.status(500)
     }
     req.bauhaus.fetch = null
-    req.bauhaus.errorCode = res.statusCode
 
-    if (req.bauhaus.type == null) {
-      req.bauhaus.ampAndHtml5 = true
-      req.bauhaus.canonical = url.resolve(config.address.own, req.path)
-      if (req.query.amp === 1 || req.query.amp === '1' || req.query.amp === true || req.query.amp === 'true') {
-        req.bauhaus.type = 'amphtml'
-      } else {
-        req.bauhaus.amphtml = req.bauhaus.canonical + '?amp=1'
-        req.bauhaus.canonical = null
-        req.bauhaus.type = 'html5'
-      }
-    }
-
-    let errorRoute = getErrorRoute(res.statusCode, req.bauhaus.type, config)
+    let errorRoute = matchErrorRoutes(res.statusCode, req.bauhaus.type, config)
     if (errorRoute != null) {
       req.bauhaus.fetch = {
         components: errorRoute.route[req.bauhaus.type],
         params: errorRoute.params
       }
-      return next()
     }
-    next(true)
+    next()
   }
 }
