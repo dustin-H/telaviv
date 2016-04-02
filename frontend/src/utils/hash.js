@@ -10,7 +10,7 @@ export function generateStringHash(str) {
   const length = str.length
 
   if (length === 0) {
-    return hash
+    return hash.toString(36)
   }
 
   for (iterator = 0; iterator < length; ++iterator) {
