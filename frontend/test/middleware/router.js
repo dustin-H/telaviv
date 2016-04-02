@@ -6,17 +6,14 @@ describe('Using the router middleware', () => {
     let mid = router()
     expect(mid).to.be.a('function')
   })
-  it('should set the statuscode to 404 and call next with error 404 when no route matches', () => {
+  it('should call next with error 404 when no route matches', () => {
     let mid = router(TestUtils.mockRouterConfig('/test/:id', 'Footer'))
 
     var req = {path: '/not/matching', bauhaus: {}}
-    var res = {status: sinon.spy()}
     const next = sinon.spy()
 
-    mid(req, res, next)
-
-    expect(res.status).to.have.been.calledOnce
-    expect(res.status).to.have.been.calledWith(404)
+    mid(req, null, next)
+    
     expect(next).to.have.been.calledOnce
     expect(next).to.have.been.calledWith(404)
     expect(req.bauhaus.route).to.be.false
