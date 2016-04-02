@@ -38,6 +38,6 @@
 	"errors": [{
 		"from": 401,
 		"to": 401,
-		"path": "/lol/login"
+		"path": "/lol/ThisIsTheLoginError"
 	}]
 }
