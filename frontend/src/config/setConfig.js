@@ -1,13 +1,28 @@
 
 var config = require('./index.js')
 import { compilePattern } from '../router/pathMatcher.js'
+const contentTypes = ['html5', 'amphtml']
 
 export default (c) => {
-
+  c.components = {}
+  let componentCounter = 0
   for (let i in c.routes) {
     let route = c.routes[i]
     route._params = compilePattern(route.path).paramNames
     route._depth = route.path.match(new RegExp('/', 'g') || []).length
+    for (var k in contentTypes) {
+      let type = contentTypes[k]
+      if (route[type] != null) {
+        for (var j in route[type]) {
+          if(route[type][j].component){
+            if(c.components[route[type][j].component] == null){
+              c.components[route[type][j].component] = 'c'+componentCounter.toString(36)+'-'
+              componentCounter++
+            }
+          }
+        }
+      }
+    }
   }
 
   c.routes.sort(function(a, b) {
