@@ -22,6 +22,12 @@ export function changeLocation(to, code) {
   }
 }
 
+export function reload() {
+  let store = get()
+  let state = store.getState()
+  pushLocation(state.content.location)
+}
+
 export function isActive(href) {
   let store = get()
   let state = store.getState()
