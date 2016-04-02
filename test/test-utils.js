@@ -1,3 +1,6 @@
+import fetchApi from './fetchApi.js'
+export { fetchApi };
+
 export function mockInitConfig(ownAddress) {
   return {address: {own: ownAddress}}
 }
