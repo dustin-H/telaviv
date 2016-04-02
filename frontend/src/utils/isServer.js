@@ -1,5 +1,5 @@
 var isServer = true
-if (typeof __GLOBAL_INITIAL_REDUX_STATE__ !== 'undefined') {
+if (typeof __GLOBAL__ !== 'undefined') {
   isServer = false
 }
 export default isServer
