@@ -1,19 +1,16 @@
 import React, { PropTypes, Component } from 'react'
-import look, { StyleSheet } from 'react-look'
-import SomeText from './SomeText.js'
 
 class Header extends Component {
   render() {
-    const {data, actions} = this.props
+    if (this.context.bauhaus.IS_SERVER) {
+      this.context.bauhaus.addToHead('<script>var SpecialScript = 42;</script>')
+    }
     return (
-      <header className={ styles.header }>
-        My Header!<SomeText></SomeText>
-      </header>
+      <div></div>
     )
   }
 }
 
-import styleSheet from './style.js'
-var styles = StyleSheet.create(styleSheet)
+Header.contextTypes = {bauhaus: React.PropTypes.object};
 
-export default look(Header)
+export default Header
