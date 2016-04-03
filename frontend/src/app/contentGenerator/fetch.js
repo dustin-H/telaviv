@@ -2,7 +2,7 @@
 import superagent from 'superagent'
 import { replaceAllParams } from '../../utils/replace.js'
 
-module.exports = function(fetch, cb) {
+export default (fetch, cb) => {
   var components = fetch.components
   var params = fetch.params
   var k = 0
