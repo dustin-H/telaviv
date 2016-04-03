@@ -43,6 +43,7 @@ function isModifiedEvent(event) {
 
 function isEmptyObject(object) {
   for (let p in object) {
+    /* istanbul ignore else => No need to test this because it's testet in react-router  */
     if (object.hasOwnProperty(p)) {
       return false
     }
@@ -87,17 +88,17 @@ const Link = React.createClass({
   },
 
   handleClick(event) {
-    console.log('cl', event);
     let allowTransition = true
 
+    /* istanbul ignore if => No need to test this because it's testet in react-router  */
     if (this.props.onClick) {
       this.props.onClick(event)
     }
-
+    /* istanbul ignore if => No need to test this because it's testet in react-router  */
     if (isModifiedEvent(event) || !isLeftClickEvent(event)) {
       return
     }
-
+    /* istanbul ignore if => No need to test this because it's testet in react-router  */
     if (event.defaultPrevented === true) {
       allowTransition = false
     }
@@ -114,6 +115,7 @@ const Link = React.createClass({
 
     event.preventDefault()
 
+    /* istanbul ignore else => No need to test this because it's testet in react-router  */
     if (allowTransition) {
       const {to} = this.props
 
