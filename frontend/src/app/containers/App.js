@@ -1,9 +1,15 @@
-import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import Content from '../components/Content';
+import React, { Component, PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import Content from '../components/Content'
+import IS_SERVER from '../../utils/isServer.js'
 
-import * as content from '../actions/content.js';
+// Do not import actions on the server because they can't be called => Saves RAM!
+let content = {}
+/* istanbul ignore if */
+if (!IS_SERVER) {
+  content = require('../actions/content.js')
+}
 
 class App extends Component {
   render() {
