@@ -1,5 +1,4 @@
 
-//import app from '../../src/app.js'
 import { generateStringHash } from '../../src/utils/hash.js'
 
 describe('The hash generator (generateStringHash)', () => {
