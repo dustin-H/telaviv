@@ -1,11 +1,13 @@
 
 import { setCache, getCache } from '../../utils/renderCache.js'
 import { get } from '../store/store.js'
+import Link from '../../utils/Link.js'
 
 const IS_SERVER = true
 const IS_CLIENT = false
 export { IS_SERVER };
 export { IS_CLIENT };
+export { Link };
 
 export function setTitle(title) {
   var cache = getCache()

@@ -1,12 +1,14 @@
 
 import { get } from '../store/store.js'
 import { pushLocation, reload } from '../actions/content.js'
+import Link from '../../utils/Link.js'
 
 const IS_SERVER = false
 const IS_CLIENT = true
 export { IS_SERVER };
 export { IS_CLIENT };
 export { reload };
+export { Link };
 
 export function setTitle(title) {
   document.title = title
