@@ -4,7 +4,7 @@ class Active extends Component {
   render() {
     return (
       <div>
-        { this.context.bauhaus.isActive('/is/active') }
+        { this.context.bauhaus.isActive('/is/active') ? 'true' : 'false' }
       </div>
     )
   }
