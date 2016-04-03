@@ -25,7 +25,7 @@ describe('The generateHtml.header middleware', () => {
   it('should add global script and bundle src script to head if provided correctly', () => {
     let mid = header({})
 
-    let req = {bauhaus: {type: 'html5'}}
+    let req = {bauhaus: {type: 'html5', clientRendering: true}}
     let res = {statusCode: 200}
     const next = sinon.spy()
     let data = {
