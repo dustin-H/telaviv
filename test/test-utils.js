@@ -101,3 +101,21 @@ export function mockConfigForPrepareErrorFetch(component) {
     }]
   }
 }
+export function mockRenderReactConfig() {
+  return {
+    clientRoutes: [],
+    components: {
+      Active: 'active-',
+      Data: 'data-',
+      Header: 'header-',
+      Link: 'link-',
+      Redirect: 'redirect-',
+      RedirectWithCode: 'redirect-with-code-',
+      StylesBlue: 'styles-blue-',
+      StylesRed: 'styles-red-',
+      Title: 'title-'
+    },
+    theme: 'test',
+    staticMarkup: true
+  }
+}
