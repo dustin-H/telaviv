@@ -5,7 +5,7 @@ import { getComponent } from '../../loader'
 class Loader extends Component {
   render() {
     const {state, actions, data} = this.props
-    const Comp = getComponent(data.component) // lookConfig={{template: (className) => Comp.displayName + '-' + className}}
+    const Comp = getComponent(data.component, state.config) // lookConfig={{template: (className) => Comp.displayName + '-' + className}}
     return (
       <Comp data={ data.data } actions={ actions }></Comp>
       );

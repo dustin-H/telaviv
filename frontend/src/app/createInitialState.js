@@ -16,7 +16,8 @@ export default function create(data, req, config) {
     },
     config: {
       routes: config.clientRoutes,
-      components: config.components
+      components: config.components,
+      theme: config.theme
     }
   }
   return state
