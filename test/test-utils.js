@@ -115,7 +115,6 @@ export function mockRenderReactConfig() {
       StylesRed: 'styles-red-',
       Title: 'title-'
     },
-    theme: 'test',
-    staticMarkup: true
+    theme: 'test'
   }
 }
