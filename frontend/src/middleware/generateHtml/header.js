@@ -1,7 +1,7 @@
 
 export default (config) => {
   return (req, res, next, data) => {
-    if (res.statusCode === 200 && req.bauhaus.type !== 'amphtml' && data.state != null && data.content != null) {
+    if (req.bauhaus.clientRendering === true && data.state != null && data.content != null) {
       data.head += '<script>var __GLOBAL__={INITIAL_STATE: ' + JSON.stringify(data.state) + '}</script>\n'
       data.head += '<script src="/.static/bundle.js" charset="utf-8" async="true"></script>\n'
     }

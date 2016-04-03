@@ -4,6 +4,7 @@ import init from './middleware/init.js'
 import router from './middleware/router.js'
 import routeTypeParser from './middleware/routeTypeParser.js'
 import redirect from './middleware/redirect.js'
+import clientRendering from './middleware/clientRendering.js'
 import prepareRouteFetch from './middleware/prepareRouteFetch.js'
 import fetch from './middleware/fetch.js'
 import renderReact from './middleware/renderReact.js'
@@ -36,6 +37,7 @@ export default (c) => {
   app.use(router(config))
   app.use(routeTypeParser(config))
   app.use(redirect(config))
+  app.use(clientRendering(config))
   app.use(prepareRouteFetch(config))
   app.use(fetch(config))
   app.use(renderReact(config))

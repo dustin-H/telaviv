@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { renderToString } from 'react-dom/server'
+import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import App from './containers/App.js'
 
@@ -31,7 +31,12 @@ export default (data, req, res, config) => {
   set(store)
   reset()
 
-  const content = renderToString(
+  let render = renderToStaticMarkup
+  if (req.bauhaus.clientRendering === true) {
+    render = renderToString
+  }
+
+  const content = render(
     <LookRoot config={ serverConfig }>
       <Provider store={ store }>
         <App />

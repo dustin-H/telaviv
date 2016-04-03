@@ -10,6 +10,7 @@ export default function(config) {
       res.status(500)
     }
     req.bauhaus.fetch = null
+    req.bauhaus.clientRendering = false
 
     let errorRoute = matchErrorRoutes(res.statusCode, req.bauhaus.type, config)
     if (errorRoute != null) {
