@@ -20,6 +20,19 @@ describe('The prepareErrorFetch middleware', () => {
     expect(next).to.have.been.calledOnce
     expect(next.args[0].length).to.equal(0)
   })
+  it('should set clientRendering to false', () => {
+    let mid = prepareErrorFetch({routes: [], errors: []})
+
+    var req = TestUtils.mockRequestForPrepareErrorFetch('html5')
+    var res = TestUtils.mockResponseForPrepareErrorFetch(200)
+    const next = sinon.spy()
+
+    mid(req, res, next, 432)
+
+    expect(req.bauhaus.clientRendering).to.be.false
+    expect(next).to.have.been.calledOnce
+    expect(next.args[0].length).to.equal(0)
+  })
   it('should set the status code to 500 if it is 200', () => {
     let mid = prepareErrorFetch({routes: [], errors: []})
 
