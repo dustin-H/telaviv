@@ -12,31 +12,23 @@ import respond from './middleware/respond.js'
 
 import prepareErrorFetch from './middleware/prepareErrorFetch.js'
 
-import config from './config'
-import setConfig from './config/setConfig.js'
+import compileConfig from './config/compileConfig.js'
 
 import staticProvider from './staticProvider'
+import errorHandler from './middleware/errorHandler.js'
 
-const errorHandler = (middleware) => {
-  return (err, req, res, next) => {
-    middleware(req, res, (error) => {
-      next(error || err)
-    }, err)
-  }
-}
-
-module.exports = function(c) {
-  setConfig(c)
+export default (c) => {
+  const config = compileConfig(c)
   var app = express()
 
-  app.use((req, res, next) => {
-    /*for (var i in require.cache) {
+  /*app.use((req, res, next) => {
+    for (var i in require.cache) {
       if (i.search('/themes/') >= 0 || i.search('/node_modules/react-look/') >= 0) {
         delete require.cache[i]
       }
-    }*/
+    }
     next()
-  })
+  })*/
 
   app.use('/.static', staticProvider(config))
 
