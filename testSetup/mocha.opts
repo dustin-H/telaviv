@@ -1,0 +1,2 @@
+--recursive
+--require testSetup/test-setup.js

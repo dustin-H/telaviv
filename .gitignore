@@ -3,8 +3,8 @@ node_modules
 
 *.log
 
-routing/temp.js
-frontend/build*
-frontend/client-build*
-frontend/.moduleCreators*
+docs/routing/temp.js
+build*
+client-build*
+.moduleCreators*
 coverage

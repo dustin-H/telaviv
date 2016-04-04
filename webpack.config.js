@@ -1,6 +1,5 @@
 var webpack = require('webpack')
 var fs = require('fs')
-var ClientServerResolver = require('./ClientServerResolver.js')
 var _ = require('lodash')
 var moduleLoaderTemplate = _.template(fs.readFileSync(require.resolve('./moduleLoaderTemplate.js')))
 
@@ -8,9 +7,9 @@ var productionPlugin = new webpack.DefinePlugin({
   'process.env.NODE_ENV': '"' + process.env.NODE_ENV + '"'
 })
 
-var themesPath = __dirname + '/frontend/src/themes'
-var moduleCreatorsPath = __dirname + '/frontend/.moduleCreators'
-var themesExportPath = __dirname + '/frontend/client-build/themes'
+var themesPath = __dirname + '/src/themes'
+var moduleCreatorsPath = __dirname + '/.moduleCreators'
+var themesExportPath = __dirname + '/client-build/themes'
 
 var themes = fs.readdirSync(themesPath)
 
@@ -41,13 +40,13 @@ try {
 } catch ( e ) {}
 
 var config = [{
-  name: 'bauhaus-frontend',
+  name: 'telaviv',
   plugins: [productionPlugin],
   context: __dirname + '/',
-  entry: __dirname + '/frontend/src/app/client.js',
+  entry: __dirname + '/src/app/client.js',
   output: {
     filename: 'bundle.js',
-    path: __dirname + '/frontend/client-build/'
+    path: __dirname + '/client-build/'
   },
   externals: [{
     'inline-style-linter': 'true'
@@ -78,15 +77,15 @@ for (var i in modules) {
   fs.writeFileSync(creatorPath, src)
 
   config.push({
-    name: 'bauhaus-frontend-' + mod.theme + '-' + mod.name,
+    name: 'telaviv-' + mod.theme + '-' + mod.name,
     plugins: [productionPlugin],
     context: __dirname + '/',
     entry: creatorPath,
     output: {
       filename: mod.name + '.js',
-      path: __dirname + '/frontend/client-build/themes/' + mod.theme
+      path: __dirname + '/client-build/themes/' + mod.theme
     },
-    resolve: {
+    /*resolve: {
       alias: {
         react: 'bauhaus-ui-module-utils/npm/react',
         'react-dom': 'bauhaus-ui-module-utils/npm/react-dom',
@@ -94,7 +93,7 @@ for (var i in modules) {
         superagent: 'bauhaus-ui-module-utils/npm/superagent',
         'react-look-scope': 'react-look-scope'
       }
-    },
+    },*/
     externals: [{
       react: 'var __GLOBAL__.npm.react',
       'react-look': 'var __GLOBAL__.npm["react-look"]',

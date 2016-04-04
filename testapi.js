@@ -3,11 +3,13 @@ var express = require('express')
 module.exports = function() {
   var app = express()
 
-  /*app.use(function(req, res, next){
-    setTimeout(function(){
+  app.use(function(req, res, next){
+    //next() 
+    res.status(404).send()
+    /*setTimeout(function(){
       next()
-    }, 2000)
-  })*/
+    }, 2000)*/
+  })
 
   app.get('/header', function(req, res) {
     //res.cookie('rememberme', '1');
