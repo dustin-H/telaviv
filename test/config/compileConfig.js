@@ -80,4 +80,23 @@ describe('The compileConfig function', () => {
       _depth: 1
     }]))
   })
+  it('should sort routes correctly', () => {
+    let config = {
+      routes: [{
+        path: '/:id/test'
+      }, {
+        path: '/test/:id'
+      }]
+    }
+    let c = compileConfig(config)
+    expect(JSON.stringify(c.routes)).to.equal(JSON.stringify([{
+      path: '/:id/test',
+      _params: ['id'],
+      _depth: 2
+    }, {
+      path: '/test/:id',
+      _params: ['id'],
+      _depth: 2
+    }]))
+  })
 })
