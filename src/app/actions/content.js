@@ -1,54 +1,35 @@
-import * as types from '../constants/ActionTypes.js';
-
+import createHistory from 'history/lib/createBrowserHistory'
+import * as types from '../constants/ActionTypes.js'
 import contentGenerator from '../contentGenerator'
-import isServer from '../../utils/isServer.js'
-
 import { get } from '../store/store.js'
 
-import createHistory from 'history/lib/createBrowserHistory'
+let history = createHistory()
 
-var history = null
+history.listenBefore(function(location, callback) {
+  get().dispatch(locationChanged(location, callback))
+})
 
-if (isServer !== true) {
-  history = createHistory()
-  let unlisten = history.listen(location => {
-    //get().dispatch(locationChanged(location))
-  })
+function locationChanged(location, callback) {
+  return (dispatch, getState) => {
 
-  history.listenBefore(function(location, callback) {
-     get().dispatch(locationChanged(location, callback))
-  })
+    dispatch(setLoading())
+    var state = getState()
 
-  function locationChanged(location, callback) {
-    return (dispatch, getState) => {
+    contentGenerator(location, state.config.routes, (err, data) => {
+      if (err != null) {
+        var href = history.createHref(location)
+        callback(false)
+        window.location.href = href
+        return
+      }
 
-      dispatch(setLoading())
-      var state = getState()
-
-      contentGenerator(location, state.config.routes, (err, data) => {
-        if (err != null) {
-          var href = history.createHref(location)
-          console.log(href);
-          // window.location.replace(href);
-          callback(false)
-          window.location.href = href
-          /*unlisten()
-          window.onpopstate = function(){
-            window.location.href = href
-          }
-          window.history.go(-1)*/
-
-          return
-        }
-
-        callback(true)
-        dispatch({
-          type: types.CONTENT_LOCATION_CHANGED,
-          location,
-          data
-        })
+      callback(true)
+      dispatch({
+        type: types.CONTENT_LOCATION_CHANGED,
+        location,
+        data
       })
-    }
+    })
   }
 }
 
