@@ -20,7 +20,6 @@ export default (fetch, cb) => {
   }
 
   var request = function(component) {
-    console.log(component);
     if (component.data != null && component.data.url != null) {
       k++
       var requestUrl = replaceAllParams(component.data.url, params)

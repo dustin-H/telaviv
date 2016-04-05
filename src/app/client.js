@@ -1,6 +1,4 @@
 
-
-
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
@@ -34,8 +32,6 @@ window.onload = function() {
 
     // Sadly need to do this here, because bable would sort a normal import. Before loading this module the store MUST be initialized! Found no better solution!
     var App = require('./containers/App.js');
-
-    console.log('RENDER');
 
     render(
       <LookRoot config={ Presets['react-dom'] }>

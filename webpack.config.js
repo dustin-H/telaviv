@@ -69,10 +69,7 @@ var config = [{
 
 for (var i in modules) {
   var mod = modules[i]
-  // var modulePath = modulesPath + '/' + name + '/index.js'
-  // var reqModulePath = modulesPath + '/' + modulePath + '/index.js'
   var creatorPath = moduleCreatorsPath + '/' + mod.name + '-' + mod.theme + '.js'
-  // var src = 'var c = __GLOBAL__.INITIAL_STATE.config.components; var r = require("react-look-scope"); var t = r.getClassNameScope(); r.setClassNameScope(c["'++'"]); __GLOBAL__.exportDefault = require("' + mod.path + '")'
   var src = moduleLoaderTemplate(mod)
   fs.writeFileSync(creatorPath, src)
 
@@ -85,15 +82,6 @@ for (var i in modules) {
       filename: mod.name + '.js',
       path: __dirname + '/client-build/themes/' + mod.theme
     },
-    /*resolve: {
-      alias: {
-        react: 'bauhaus-ui-module-utils/npm/react',
-        'react-dom': 'bauhaus-ui-module-utils/npm/react-dom',
-        'react-look': 'bauhaus-ui-module-utils/npm/react-look',
-        superagent: 'bauhaus-ui-module-utils/npm/superagent',
-        'react-look-scope': 'react-look-scope'
-      }
-    },*/
     externals: [{
       react: 'var __GLOBAL__.npm.react',
       'react-look': 'var __GLOBAL__.npm["react-look"]',
@@ -118,7 +106,5 @@ for (var i in modules) {
     }
   })
 }
-
-// fs.writeFileSync(__dirname + '/src/coreModules.js', 'module.exports = ' + JSON.stringify(modules))
 
 module.exports = config;
