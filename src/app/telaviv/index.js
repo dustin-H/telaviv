@@ -2,12 +2,14 @@
 import { setCache, getCache } from '../../utils/renderCache.js'
 import { get } from '../store/store.js'
 import Link from '../../utils/Link.js'
+import isActive from './isActive.js'
 
 const IS_SERVER = true
 const IS_CLIENT = false
 export { IS_SERVER };
 export { IS_CLIENT };
 export { Link };
+export { isActive };
 
 export function setTitle(title) {
   var cache = getCache()
@@ -27,14 +29,4 @@ export function changeLocation(to, code) {
   cache.redirect = to
   cache.redirectCode = code
   setCache(cache)
-}
-
-export function isActive(href) {
-  let store = get()
-  let state = store.getState()
-  let pathname = state.content.location.pathname
-  if (href === pathname) {
-    return true
-  }
-  return false
 }
