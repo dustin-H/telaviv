@@ -10,6 +10,7 @@ import fetch from './middleware/fetch.js'
 import renderReact from './middleware/renderReact.js'
 import generateHtml from './middleware/generateHtml'
 import respond from './middleware/respond.js'
+import serviceUnavailable from './middleware/serviceUnavailable.js'
 
 import prepareErrorFetch from './middleware/prepareErrorFetch.js'
 
@@ -50,6 +51,7 @@ export default (c) => {
   // app.use(errorHandler(catchErrors(config)))
   app.use(errorHandler(generateHtml(config)))
   app.use(errorHandler(respond(config)))
+  app.use(errorHandler(serviceUnavailable(config)))
 
   return app;
 }
