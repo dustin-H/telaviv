@@ -12,7 +12,10 @@
 			"data": {
 				"type": "REST",
 				"url": "/api/article/:id"
-			}
+			},
+      "options": {
+        "id": ":id"
+      }
 		}, {
 			"component": "Footer"
 		}],

@@ -33,7 +33,7 @@ export default (location, routes, done) => {
   }, function(err, results) {
     var data = {}
     if (err == null) {
-      data = combineFetchData(fetchData.components, results.fetch)
+      data = combineFetchData(fetchData.components, results.fetch, fetchData.params)
     }
 
     done(err, data)

@@ -68,6 +68,39 @@ describe('The fetch middleware', () => {
       done()
     })
   })
+  it('should pass the options object correctly', (done) => {
+    let mid = fetch(config)
+
+    var req = {
+      telaviv: {
+        fetch: {
+          components: [{
+            component: 'Footer',
+            options: {
+              test: ':id'
+            }
+          }],
+          params: {
+            id: 'MyId'
+          }
+        }
+      },
+      headers: {}
+    }
+    var res = {}
+
+    mid(req, res, (next) => {
+      expect(req.telaviv.fetch.data).to.be.an('array')
+      expect(req.telaviv.fetch.data.length).to.equal(1)
+      expect(req.telaviv.fetch.data[0].component).to.equal('Footer')
+      expect(req.telaviv.fetch.data[0].data).to.be.an('object')
+      expect(JSON.stringify(req.telaviv.fetch.data[0].options)).to.equal(JSON.stringify({
+        test: 'MyId'
+      }))
+      expect(JSON.stringify(req.telaviv.fetch.data[0].data)).to.equal('{}')
+      done()
+    })
+  })
   it('should fetch a simple api source and forward the correct headers and id', (done) => {
     let mid = fetch(config)
 
@@ -429,7 +462,7 @@ describe('The fetch middleware', () => {
     mid(req, res, (next) => {
       expect(next).to.be.undefined
       expect(res.set).to.be.calledOnce
-      expect(res.set).to.be.calledWith('Set-Cookie', ["first=val1; Path=/"])
+      expect(res.set).to.be.calledWith('Set-Cookie', ['first=val1; Path=/'])
       done()
     })
   })

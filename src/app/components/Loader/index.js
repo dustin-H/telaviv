@@ -7,7 +7,7 @@ class Loader extends Component {
     const {state, actions, data} = this.props
     const Comp = getComponent(data.component, state.config) // lookConfig={{template: (className) => Comp.displayName + '-' + className}}
     return (
-      <Comp data={ data.data } actions={ actions }></Comp>
+      <Comp data={ data.data } actions={ actions } options={ data.options || {} }></Comp>
       );
   }
 }

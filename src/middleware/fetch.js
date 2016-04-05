@@ -11,7 +11,7 @@ export default (config) => {
       if (err != null) {
         return next(err.status)
       }
-      req.telaviv.fetch.data = combineFetchData(req.telaviv.fetch.components, data)
+      req.telaviv.fetch.data = combineFetchData(req.telaviv.fetch.components, data, req.telaviv.fetch.params)
       next()
     })
   }
