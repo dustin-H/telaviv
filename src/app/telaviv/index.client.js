@@ -16,7 +16,7 @@ export function setTitle(title) {
   document.title = title
 }
 
-export function changeLocation(to, code) {
+export function changeLocation(to) {
   if (to.substr(0, 7) === 'http://' || to.substr(0, 8) === 'https://') {
     window.location.href = to
   } else {
