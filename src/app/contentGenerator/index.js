@@ -3,7 +3,7 @@ import matchRoutes from '../../router/matchRoutes.js'
 import getComponentsFromRoute from './getComponentsFromRoute.js'
 import { ensureComponents } from '../loader'
 import fetch from './fetch.js'
-import async from 'async'
+import parallel from 'async/parallel'
 import combineFetchData from '../../utils/combineFetchData.js'
 
 export default (location, routes, done) => {
@@ -18,7 +18,7 @@ export default (location, routes, done) => {
     params: match.params
   }
 
-  async.parallel({
+  parallel({
     fetch: function(callback) {
       fetch(fetchData, callback)
     },
