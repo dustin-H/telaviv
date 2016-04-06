@@ -115,6 +115,7 @@ export function mockRenderReactConfig() {
       StylesRed: 'styles-red-',
       Title: 'title-'
     },
-    theme: 'test'
+    theme: 'test',
+    buildPath: 'build'
   }
 }

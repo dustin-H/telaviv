@@ -5,6 +5,6 @@ node_modules
 
 docs/routing/temp.js
 build*
-client-build*
+lib*
 .moduleCreators*
 coverage

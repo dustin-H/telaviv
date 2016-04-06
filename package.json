@@ -2,17 +2,23 @@
   "name": "telaviv",
   "version": "0.0.2",
   "description": "Node.JS React Frontend Server",
-  "main": "build/app.js",
+  "main": "build/server/app.js",
   "scripts": {
     "start": "NODE_ENV=production node app.js",
-    "build": "NODE_ENV=production babel src -d build",
-    "build-and-start": "NODE_ENV=development npm run build && npm start",
-    "prod-build-client": "NODE_ENV=production webpack -p --progress --colors",
-    "prod-build-server": "NODE_ENV=production babel src -d build",
-    "production": "npm run prod-build-server && npm run prod-build-client",
-    "test": "istanbul cover _mocha -x \"src/router/pathMatcher.js\" -- test --opts testSetup/mocha.opts",
+    "build-server": "NODE_ENV=production babel src -d lib",
+    "build-themes": "NODE_ENV=production babel themes -d build/server",
+    "build-client": "NODE_ENV=production webpack -p --progress --colors",
+    "build-all": "npm run build-server && npm run build-themes && npm run build-client",
+    "clean-lib": "rm -rf lib",
+    "clean-build": "rm -rf build",
+    "clean": "npm run clean-lib && npm run clean-build",
+    "build": "npm run clean && npm run build-all",
+    "build-server-dev": "NODE_ENV=development babel src -d lib",
+    "build-themes-dev": "NODE_ENV=development babel themes -d build/server",
+    "dev-server": "npm run build-server-dev && npm run build-themes-dev && npm start",
     "dev": "NODE_ENV=development webpack --progress --colors --watch",
-    "travis": "npm run prod-build-server && npm run prod-build-client && npm test"
+    "test": "istanbul cover _mocha -x \"src/router/pathMatcher.js\" -- test --opts testSetup/mocha.opts",
+    "travis": "npm run build && npm test"
   },
   "babel": {
     "presets": [

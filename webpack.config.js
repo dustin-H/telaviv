@@ -7,9 +7,9 @@ var productionPlugin = new webpack.DefinePlugin({
   'process.env.NODE_ENV': '"' + process.env.NODE_ENV + '"'
 })
 
-var themesPath = __dirname + '/src/themes'
+var themesPath = __dirname + '/themes'
 var moduleCreatorsPath = __dirname + '/.moduleCreators'
-var themesExportPath = __dirname + '/client-build/themes'
+var themesExportPath = __dirname + '/build/client'
 
 var themes = fs.readdirSync(themesPath)
 
@@ -46,7 +46,7 @@ var config = [{
   entry: __dirname + '/src/app/client.js',
   output: {
     filename: 'bundle.js',
-    path: __dirname + '/client-build/'
+    path: __dirname + '/lib'
   },
   externals: [{
     'inline-style-linter': 'true'
@@ -80,7 +80,7 @@ for (var i in modules) {
     entry: creatorPath,
     output: {
       filename: mod.name + '.js',
-      path: __dirname + '/client-build/themes/' + mod.theme
+      path: __dirname + '/build/client/' + mod.theme
     },
     externals: [{
       react: 'var __GLOBAL__.npm.react',

@@ -15,7 +15,7 @@ var app = express()
 
 var config = require('./config.json')
 
-var telaviv = require('./build/app.js');
+var telaviv = require('./lib/app.js');
 var testapi = require('./testapi.js');
 
 app.listen(8000, function(){

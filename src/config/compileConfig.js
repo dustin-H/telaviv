@@ -50,5 +50,7 @@ export default (c) => {
     }
   }
 
+  c.buildPath = c.buildPath || 'build'
+
   return Object.assign({}, c)
 }

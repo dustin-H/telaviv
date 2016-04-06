@@ -17,7 +17,8 @@ export default function create(data, req, config) {
     config: {
       routes: config.clientRoutes,
       components: config.components,
-      theme: config.theme
+      theme: config.theme,
+      buildPath: config.buildPath
     }
   }
   return state
