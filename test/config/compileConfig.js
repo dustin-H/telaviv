@@ -99,4 +99,15 @@ describe('The compileConfig function', () => {
       _depth: 2
     }]))
   })
+
+  it('should not apply a changed theme', () => {
+    let config = {
+      theme: 'changedTheme'
+    }
+    let oldConfig = {
+      theme: 'default'
+    }
+    let c = compileConfig(config, oldConfig)
+    expect(c.theme).to.equal('default')
+  })
 })
