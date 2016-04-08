@@ -20,18 +20,9 @@ import compileConfig from './config/compileConfig.js'
 import staticProvider from './staticProvider'
 import errorHandler from './middleware/errorHandler.js'
 
-export default (c) => {
-  const config = compileConfig(c)
+export default (c, old = {}) => {
+  const config = compileConfig(c, old)
   var app = express()
-
-  /*app.use((req, res, next) => {
-    for (var i in require.cache) {
-      if (i.search('/themes/') >= 0 || i.search('/node_modules/react-look/') >= 0) {
-        delete require.cache[i]
-      }
-    }
-    next()
-  })*/
 
   app.use('/.static', staticProvider(config))
 
