@@ -25,3 +25,5 @@ export function server(config) {
 
   return app
 }
+
+export default server
