@@ -58,6 +58,7 @@ export default (c, old = {}) => {
 
   c.buildPath = c.buildPath || old.buildPath || 'build'
   c.staticCacheControl = c.staticCacheControl || old.staticCacheControl || 'max-age=60'
+  c.errors = c.errors || old.errors || []
 
   return Object.assign({}, c)
 }
