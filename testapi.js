@@ -13,13 +13,13 @@ module.exports = function() {
 
   app.get('/header', function(req, res) {
     //res.cookie('rememberme', '1');
-    //res.set('Cache-Control', 'max-age=300')
     res.json({header: 'data'})
   })
 
   app.get('/article/:id', function(req, res) {
     //res.cookie('someother', '2');
     //res.set('Cache-Control', 'max-age=500')
+    //res.set('Cache-Control', 'max-age=30')
     if(req.params.id === 'loginfail'){
       res.status(401)
     }
