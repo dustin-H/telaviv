@@ -11,6 +11,7 @@ import renderReact from './middleware/renderReact.js'
 import generateHtml from './middleware/generateHtml'
 import respond from './middleware/respond.js'
 import serviceUnavailable from './middleware/serviceUnavailable.js'
+import cacheControl from './middleware/cacheControl.js'
 
 import prepareErrorFetch from './middleware/prepareErrorFetch.js'
 
@@ -43,12 +44,12 @@ export default (c) => {
   app.use(fetch(config))
   app.use(renderReact(config))
   app.use(generateHtml(config))
+  app.use(cacheControl(config))
   app.use(respond(config))
 
   app.use(errorHandler(prepareErrorFetch(config)))
   app.use(errorHandler(fetch(config)))
   app.use(errorHandler(renderReact(config)))
-  // app.use(errorHandler(catchErrors(config)))
   app.use(errorHandler(generateHtml(config)))
   app.use(errorHandler(respond(config)))
   app.use(errorHandler(serviceUnavailable(config)))

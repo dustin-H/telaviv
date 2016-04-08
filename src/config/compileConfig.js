@@ -14,9 +14,9 @@ export default (c) => {
       let type = contentTypes[k]
       if (route[type] != null) {
         for (var j in route[type]) {
-          if(route[type][j].component){
-            if(c.components[route[type][j].component] == null){
-              c.components[route[type][j].component] = 'c'+componentCounter.toString(36)+'-'
+          if (route[type][j].component) {
+            if (c.components[route[type][j].component] == null) {
+              c.components[route[type][j].component] = 'c' + componentCounter.toString(36) + '-'
               componentCounter++
             }
           }
@@ -51,6 +51,7 @@ export default (c) => {
   }
 
   c.buildPath = c.buildPath || 'build'
+  c.staticCacheControl = c.staticCacheControl || 'max-age=60'
 
   return Object.assign({}, c)
 }
