@@ -1,5 +1,5 @@
 # BAUHAUS JS 2 Idee
-Hab ne Idee wie wir das überwiegend ohne die beiden Frameworks relativ leicht lösen können. (Vielleicht können wir zu Teilen Feathers verwenden.) 
+Hab ne Idee wie wir das überwiegend ohne die beiden Frameworks relativ leicht lösen können. (Vielleicht können wir zu Teilen Feathers verwenden.)
 
 Hab mir n paar Ideen bei Feathers abgeschaut ;-)
 
@@ -44,20 +44,20 @@ Um jetzt nicht für jedes Model jedes mal alle CRUD Funktionen zu implementieren
 # Role Mapping
 Um nun Berechtigungen für einen **Service** zu setzen würde ich eine Art Rollen-Tabelle anlegen:
 
-ID | Service    | ROLE
--- | ---------- | ------------
-0  | AddNewPost | COLLABORATOR
-1  | AddNewPost | ADMIN
+|ID | Service    | ROLE|
+|-- | ---------- | ------------|
+|0  | AddNewPost | COLLABORATOR|
+|1  | AddNewPost | ADMIN|
 
 Diese Tabelle würde im Prinzip aussagen, dass der Nutzer der den Service AddNewPost aufrufen will die Rollen COLLABORATOR oder ADMIN haben muss. Wenn ein **Service** nicht eingetragen ist, ist er nicht erreichbar.
 
 Da aber oft Rollen allein nicht reichen und man Benutzerdefinierte Berechtigungen benötigt, können noch über zwei weitere Felder ROLE_FUNCTIONS aufgerufen werden:
 
-ID | Service       | ROLE         | ROLE-FUNCTION | PARAMS
--- | ------------- | ------------ | ------------- | ----------------------------------------
-0  | AddNewPost    | COLLABORATOR | NULL          | NULL
-1  | AddNewPost    | ADMIN        | NULL          | NULL
-2  | ChangeProject | NULL         | PROJECT_OWNER | {"id": "params.id", "userId": "user.id"}
+|ID | Service       | ROLE         | ROLE-FUNCTION | PARAMS |
+|-- | ------------- | ------------ | ------------- | ---------------------------------------- |
+|0  | AddNewPost    | COLLABORATOR | NULL          | NULL|
+|1  | AddNewPost    | ADMIN        | NULL          | NULL|
+|2  | ChangeProject | NULL         | PROJECT_OWNER | {"id": "params.id", "userId": "user.id"}|
 
 Um hier das Project zu verändern muss der Nutzer Project-Owner sein. Das kann aber nicht einfach so bestimmt werden. Dafür werden noch Parameter gebraucht. In den Values des PARAMS objektes kann auf die params des **Services** zugegriffen werden, sowie auf das user Object.
 
@@ -83,11 +83,11 @@ export default {
 
 Um jetzt von außen die **Services** erreichen zu können, werden sie auf einen REST endpoint gemappt. Dies könnte z.B. so aussehen:
 
-ID | PATH         | Service       | METHOD | CONTENT-TYPE                      | PARAMS
--- | ------------ | ------------- | ------ | --------------------------------- | ---------------------------------------------------------------
-0  | /post        | AddNewPost    | POST   | application/json                  | {"name": "body.name", "text": "body.text", "userId": "user.id"}
-0  | /post        | AddNewPost    | POST   | application/x-www-form-urlencoded | {"name": "body.name", "text": "body.text", "userId": "user.id"}
-1  | /project/:id | ChangeProject | PUT    | application/json                  | {"id": "params.id", "data": "body"}
+|ID | PATH         | Service       | METHOD | CONTENT-TYPE                      | PARAMS|
+|-- | ------------ | ------------- | ------ | --------------------------------- | ---------------------------------------------------------------|
+|0  | /post        | AddNewPost    | POST   | application/json                  | {"name": "body.name", "text": "body.text", "userId": "user.id"}|
+|1  | /post        | AddNewPost    | POST   | application/x-www-form-urlencoded | {"name": "body.name", "text": "body.text", "userId": "user.id"}|
+|2  | /project/:id | ChangeProject | PUT    | application/json                  | {"id": "params.id", "data": "body"}|
 
 Die PARAMS sind die selben die im **Service** definiert wurden. In den values kann man auf `body`, `params`, `query`, `req` und `res` zugreifen und so die benötigten Parameter weitergeben.
 
