@@ -45,7 +45,7 @@ Um jetzt nicht für jedes Model jedes mal alle CRUD Funktionen zu implementieren
 Um nun Berechtigungen für einen **Service** zu setzen würde ich eine Art Rollen-Tabelle anlegen:
 
 |ID | Service    | ROLE|
-|-- | ---------- | ------------|
+|--- | ---------- | ------------|
 |0  | AddNewPost | COLLABORATOR|
 |1  | AddNewPost | ADMIN|
 
@@ -53,8 +53,8 @@ Diese Tabelle würde im Prinzip aussagen, dass der Nutzer der den Service AddNew
 
 Da aber oft Rollen allein nicht reichen und man Benutzerdefinierte Berechtigungen benötigt, können noch über zwei weitere Felder ROLE_FUNCTIONS aufgerufen werden:
 
-|ID | Service       | ROLE         | ROLE-FUNCTION | PARAMS |
-|-- | ------------- | ------------ | ------------- | ---------------------------------------- |
+|_ID | Service       | ROLE         | ROLE-FUNCTION | PARAMS |
+|--- | ------------- | ------------ | ------------- | ---------------------------------------- |
 |0  | AddNewPost    | COLLABORATOR | NULL          | NULL|
 |1  | AddNewPost    | ADMIN        | NULL          | NULL|
 |2  | ChangeProject | NULL         | PROJECT_OWNER | {"id": "params.id", "userId": "user.id"}|
@@ -83,11 +83,11 @@ export default {
 
 Um jetzt von außen die **Services** erreichen zu können, werden sie auf einen REST endpoint gemappt. Dies könnte z.B. so aussehen:
 
-|ID | PATH         | Service       | METHOD | CONTENT-TYPE                      | PARAMS|
-|-- | ------------ | ------------- | ------ | --------------------------------- | ---------------------------------------------------------------|
-|0  | /post        | AddNewPost    | POST   | application/json                  | {"name": "body.name", "text": "body.text", "userId": "user.id"}|
-|1  | /post        | AddNewPost    | POST   | application/x-www-form-urlencoded | {"name": "body.name", "text": "body.text", "userId": "user.id"}|
-|2  | /project/:id | ChangeProject | PUT    | application/json                  | {"id": "params.id", "data": "body"}|
+| ID | PATH         | Service       | METHOD | CONTENT-TYPE                      | PARAMS |
+| --- | ------------ | ------------- | ------ | --------------------------------- | --------------------------------------------------------------- |
+| 0  | /post        | AddNewPost    | POST   | application/json                  | {"name": "body.name", "text": "body.text", "userId": "user.id"}|
+| 1  | /post        | AddNewPost    | POST   | application/x-www-form-urlencoded | {"name": "body.name", "text": "body.text", "userId": "user.id"}|
+| 2  | /project/:id | ChangeProject | PUT    | application/json                  | {"id": "params.id", "data": "body"} |
 
 Die PARAMS sind die selben die im **Service** definiert wurden. In den values kann man auf `body`, `params`, `query`, `req` und `res` zugreifen und so die benötigten Parameter weitergeben.
 
