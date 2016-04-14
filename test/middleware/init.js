@@ -17,7 +17,7 @@ describe('Using the init middleware', () => {
 
     expect(req.telaviv).to.be.an('object')
     expect(req.telaviv.canonical).to.be.a('string')
-    expect(req.telaviv.canonical).to.equal('http://localhost/demo/test')
+    expect(req.telaviv.canonical).to.equal('/demo/test')
     expect(next).to.have.been.calledOnce
   })
 })

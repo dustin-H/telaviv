@@ -10,7 +10,7 @@ export default function(config) {
       req.telaviv.timetracking = {start: process.hrtime()}
     }
 
-    req.telaviv.canonical = url.resolve(req.path)
+    req.telaviv.canonical = req.path
     next()
   }
 }
