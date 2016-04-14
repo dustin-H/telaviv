@@ -99,15 +99,20 @@ describe('The compileConfig function', () => {
       _depth: 2
     }]))
   })
-
   it('should not apply a changed theme', () => {
-    let config = {
-      theme: 'changedTheme'
-    }
-    let oldConfig = {
-      theme: 'default'
-    }
+    let config = {theme: 'changedTheme'}
+    let oldConfig = {theme: 'default'}
     let c = compileConfig(config, oldConfig)
     expect(c.theme).to.equal('default')
+  })
+  it('should not add a internal route to clientRoutes', () => {
+    let config = {
+      routes: [{
+        path: '/:id/test',
+        internal: true
+      }]
+    }
+    let c = compileConfig(config)
+    expect(JSON.stringify(c.clientRoutes)).to.equal(JSON.stringify([]))
   })
 })

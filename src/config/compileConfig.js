@@ -50,7 +50,7 @@ export default (c, old = {}) => {
   c.clientRoutes = []
   for (let i in c.routes) {
     let route = c.routes[i]
-    if (route.html5 != null && route.redirect == null && route.path != null) {
+    if (route.internal !== true && route.html5 != null && route.redirect == null && route.path != null) {
       var exportRoute = {html5: route.html5, path: route.path}
       c.clientRoutes.push(exportRoute)
     }

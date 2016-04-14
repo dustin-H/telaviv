@@ -2,10 +2,14 @@ import fetchApi from './fetchApi.js'
 export { fetchApi };
 
 export function mockInitConfig(ownAddress) {
-  return {address: {own: ownAddress}}
-}
-export function mockRouterConfig(pathname, component) {
   return {
+    address: {
+      own: ownAddress
+    }
+  }
+}
+export function mockRouterConfig(pathname, component, internal) {
+  let c = {
     routes: [{
       path: pathname,
       html5: [{
@@ -13,6 +17,10 @@ export function mockRouterConfig(pathname, component) {
       }]
     }]
   }
+  if (internal === true) {
+    c.routes[0].internal = true
+  }
+  return c
 }
 export function mockRequestForRouteTypeParser(canonical, html5, amphtml, redirect, amp) {
   let req = {
@@ -70,7 +78,11 @@ export function mockRequestForPrepareRouteFetch(type, components, params) {
   return req
 }
 export function mockRequestForPrepareErrorFetch(type) {
-  let req = {telaviv: {type: type}}
+  let req = {
+    telaviv: {
+      type: type
+    }
+  }
   return req
 }
 export function mockResponseForPrepareErrorFetch(code) {
