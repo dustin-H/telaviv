@@ -1,9 +1,9 @@
 # Documentation of TelAviv.JS
 ## Table of contents
-- Get Started
+- 1 Get Started
   - **1.1 [Example](Example.md)**
 
-- API Reference
+- 2 API Reference
   - **2.1 [Telaviv](api/telaviv.md)**
     - 2.1.1 [Config](api/config.md)
     - 2.1.2 [Route](api/route.md)
