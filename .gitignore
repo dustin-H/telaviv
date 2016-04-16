@@ -6,5 +6,5 @@ node_modules
 docs/routing/temp.js
 build*
 lib*
-.moduleCreators*
+.telavivModuleCreators*
 coverage

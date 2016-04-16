@@ -59,6 +59,7 @@ export default (c, old = {}) => {
   c.buildPath = c.buildPath || old.buildPath || 'build'
   c.staticCacheControl = c.staticCacheControl || old.staticCacheControl || 'max-age=60'
   c.errors = c.errors || old.errors || []
+  c.apiAddress = c.apiAddress || old.apiAddress || 'http://localhost/'
 
   return Object.assign({}, c)
 }
