@@ -25,7 +25,8 @@
     "dev": "NODE_ENV=development webpack --progress --colors --watch",
     "test": "istanbul cover _mocha -x \"src/router/pathMatcher.js\" -- test --opts testSetup/mocha.opts",
     "travis": "npm run build && npm test",
-    "pre-publish": "npm run build && npm test"
+    "pre-publish": "npm run build && npm test",
+    "travis-install": "npm install && exit 0"
   },
   "babel": {
     "presets": [
