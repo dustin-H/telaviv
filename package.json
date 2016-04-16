@@ -61,7 +61,7 @@
     "react-look": "^1.0.0-beta8",
     "react-look-scope": "^0.0.2",
     "react-look-server-rendering": "^0.0.2",
-    "react-redux": "^4.4.1",
+    "react-redux": "^4.4.5",
     "redux": "^3.3.1",
     "redux-thunk": "^2.0.1",
     "superagent": "^1.7.2",
