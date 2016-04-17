@@ -94,7 +94,7 @@ export default (fetch, req, res, config, cb) => {
   let request = (component) => {
     if (component.data != null && component.data.url != null) {
       k++
-      var requestUrl = url.resolve(config.address.api, component.data.url)
+      var requestUrl = url.resolve(config.apiAddress, component.data.url)
       requestUrl = replaceAllParams(requestUrl, params)
       superagent.get(requestUrl).set(req.headers).accept('json').end((err, superres) => {
         response(component, err, superres)

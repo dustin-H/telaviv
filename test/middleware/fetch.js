@@ -1,6 +1,6 @@
 
 import fetch from '../../src/middleware/fetch.js'
-const config = {address: {api: 'http://localhost:4217/'}}
+const config = {apiAddress: 'http://localhost:4217/'}
 
 describe('The fetch middleware', () => {
   before((done) => {
