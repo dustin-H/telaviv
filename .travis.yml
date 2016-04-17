@@ -7,6 +7,3 @@ script:
   - npm run travis
 after_script:
   - codeclimate-test-reporter < coverage/lcov.info
-addons:
-  code_climate:
-    repo_token: CCTOKEN
