@@ -1,6 +1,7 @@
 <p align="center"><img src="docs/img/telavivjs.png" width=220></p>
 <p align="center"><a href="https://github.com/facebook/react">React</a> Universal Rendering</p>
-<p align="center"><a href="https://travis-ci.org/dustin-H/telaviv"><img src="https://travis-ci.org/dustin-H/telaviv.svg"/></a></p>
+<p align="center"><a href="https://travis-ci.org/dustin-H/telaviv"><img src="https://travis-ci.org/dustin-H/telaviv.svg"/></a>&nbsp;<a href="https://codeclimate.com/github/dustin-H/telaviv"><img src="https://codeclimate.com/github/dustin-H/telaviv/badges/gpa.svg" /></a>&nbsp;<a href="https://codeclimate.com/github/dustin-H/telaviv/coverage"><img src="https://codeclimate.com/github/dustin-H/telaviv/badges/coverage.svg" /></a></p>
+<p align="center"><a href="https://github.com/dustin-H/telaviv/blob/master/docs/README.md">Docs</a> - <a href="https://github.com/dustin-H/telaviv/blob/master/docs/GetStarted.md">Get Started</a></p>
 
 <br/>
 
