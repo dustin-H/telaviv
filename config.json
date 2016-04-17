@@ -43,9 +43,8 @@
 		}]
 	}],
 	"theme": "default",
-	"address": {
-		"api": "http://localhost:8000/"
-	},
+	"apiAddress": "http://localhost:8000/"
+	,
 	"errors": [{
 		"from": 401,
 		"to": 401,

@@ -61,9 +61,7 @@ export default {
       component: 'Footer'
     }]
   }],
-  address: {
-    api: 'http://localhost:8000/'
-  }
+  apiAddress: 'http://localhost:8000/'
 }
 ```
 

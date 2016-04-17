@@ -1,6 +1,6 @@
 {
   "name": "telaviv",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Node.JS React Frontend Server",
   "main": "lib/app.js",
   "files": [
