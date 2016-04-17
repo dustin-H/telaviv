@@ -5,3 +5,8 @@ node_js:
 before_install: if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
 script:
   - npm run travis
+after_script:
+  - codeclimate-test-reporter < lcov.info
+addons:
+  code_climate:
+    repo_token: <%= ENV['CCTOKEN'] %>

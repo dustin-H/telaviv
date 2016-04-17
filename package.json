@@ -26,7 +26,8 @@
     "test": "istanbul cover _mocha -x \"src/router/pathMatcher.js\" -- test --opts testSetup/mocha.opts",
     "travis": "npm run build && npm test",
     "pre-publish": "npm run build && npm test",
-    "travis-install": "npm install && exit 0"
+    "travis-install": "npm install && exit 0",
+    "coverage": "codeclimate-test-reporter < coverage/lcov.info"
   },
   "babel": {
     "presets": [
@@ -87,7 +88,8 @@
     "mocha": "^2.4.5",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
-    "webpack": "^1.12.14"
+    "webpack": "^1.12.14",
+    "codeclimate-test-reporter": "^0.3.1"
   },
   "esformatter": {
     "plugins": [
