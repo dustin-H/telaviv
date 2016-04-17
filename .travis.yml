@@ -9,4 +9,4 @@ after_script:
   - codeclimate-test-reporter < lcov.info
 addons:
   code_climate:
-    repo_token: <%= ENV['CCTOKEN'] %>
+    repo_token: CCTOKEN
