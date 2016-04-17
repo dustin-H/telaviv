@@ -1,0 +1,18 @@
+
+exclude_paths:
+- themes/**/*
+- docs/**/*
+- test/**/*
+- testSetup/**/*
+- es6shim.js
+- app.js
+- testapi.js
+- dev.js
+- config.json
+- getWebpackConfig.js
+- moduleLoaderTemplate.js
+- nodeExportLoader.js
+- webpack.config.js
+- package.json
+languages:
+  JavaScript: true
