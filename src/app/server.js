@@ -25,6 +25,7 @@ export default (data, req, res, config) => {
   if (req.telaviv.timetracking != null) {
     var renderStart = process.hrtime()
   }
+
   const state = createInitialState(data, req, config)
   const store = createStore(state)
 

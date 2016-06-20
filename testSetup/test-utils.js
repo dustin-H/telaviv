@@ -117,16 +117,30 @@ export function mockRenderReactConfig() {
   return {
     clientRoutes: [],
     components: {
-      Active: 'active-',
-      Data: 'data-',
-      Header: 'header-',
-      Link: 'link-',
-      Redirect: 'redirect-',
-      RedirectWithCode: 'redirect-with-code-',
-      StylesBlue: 'styles-blue-',
-      StylesRed: 'styles-red-',
-      Title: 'title-'
+      'test/Active': 'active-',
+      'test/Data': 'data-',
+      'test/Header': 'header-',
+      'test/Link': 'link-',
+      'test/Redirect': 'redirect-',
+      'test/RedirectWithCode': 'redirect-with-code-',
+      'test/StylesBlue': 'styles-blue-',
+      'test/StylesRed': 'styles-red-',
+      'test/Title': 'title-'
     },
+    theme: 'test',
+    buildPath: 'build'
+  }
+}
+export function mockClearModuleCacheConfig() {
+  return {
+    routes: [{
+      path: '/test/:id',
+      html5: [{
+        component: 'Header'
+      }, {
+        component: 'Data'
+      }]
+    }],
     theme: 'test',
     buildPath: 'build'
   }

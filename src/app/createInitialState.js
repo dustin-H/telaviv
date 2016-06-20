@@ -21,5 +21,6 @@ export default function create(data, req, config) {
       buildPath: config.buildPath
     }
   }
+
   return state
 }

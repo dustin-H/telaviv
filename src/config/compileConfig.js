@@ -6,10 +6,10 @@ const pathRegExp = new RegExp('/', 'g')
 export default (c, old = {}) => {
   c.theme = c.theme || old.theme || 'default'
   c.routes = c.routes || old.routes || []
-  if (old.theme != null && c.theme !== old.theme) {
+  /*if (old.theme != null && c.theme !== old.theme) {
     c.theme = old.theme
     console.error('Telaviv: Config.theme can\'t get changed on runtime!')
-  }
+  }*/
   c.components = old.components || {}
   c.componentCounter = old.componentCounter || 0
   for (let i in c.routes) {
@@ -21,8 +21,8 @@ export default (c, old = {}) => {
       if (route[type] != null) {
         for (var j in route[type]) {
           if (route[type][j].component) {
-            if (c.components[route[type][j].component] == null) {
-              c.components[route[type][j].component] = 'c' + c.componentCounter.toString(36) + '-'
+            if (c.components[c.theme+'/'+route[type][j].component] == null) {
+              c.components[c.theme+'/'+route[type][j].component] = 'c' + c.componentCounter.toString(36) + '-'
               c.componentCounter++
             }
           }

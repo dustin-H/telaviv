@@ -31,7 +31,7 @@ config.errors = [{
 This catches all 4xx HTTP Errors and renders the path from `routes`. `:code` gets replaced by the StatusCode.
 
 ### `theme`
-A name of a theme which gets used for rendering. This can't be changed with [setConfig](telaviv.md#setConfig) on runtime.
+A name of a theme which gets used for rendering.
 
 ### `apiAddress`
 Defines the URL of your API-Server.

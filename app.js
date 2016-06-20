@@ -18,12 +18,19 @@ var config = require('./config.json')
 var telaviv = require('./lib/index.js');
 var testapi = require('./testapi.js');
 
-app.listen(8000, function() {
-  console.log('STARTED!');
+var port = 8000
+
+app.listen(port, function() {
+  console.log('STARTED on port ' + port + '!');
 })
 
 // app.use(morgan('combined'))
 app.use(compression());
+
+app.get('/teltest', function(req, res) {
+  res.json(telaviv.clearModuleCache())
+})
+
 app.get('/telaviv', function(req, res) {
   telaviv.setConfig(config)
   res.json(config)

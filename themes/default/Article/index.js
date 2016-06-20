@@ -14,6 +14,7 @@ class Article extends Component {
 
     return (
       <article className={ styles.article }>
+        LULULULULU
         { JSON.stringify(data) }
       </article>
     )

@@ -29,8 +29,8 @@ describe('The compileConfig function', () => {
     }
     let c = compileConfig(config)
     expect(JSON.stringify(c.components)).to.equal(JSON.stringify({
-      Comp1: 'c0-',
-      Comp2: 'c1-'
+      'default/Comp1': 'c0-',
+      'default/Comp2': 'c1-'
     }))
     expect(JSON.stringify(c.clientRoutes)).to.equal(JSON.stringify([{
       html5: [{
@@ -99,11 +99,11 @@ describe('The compileConfig function', () => {
       _depth: 2
     }]))
   })
-  it('should not apply a changed theme', () => {
+  it('should apply a changed theme', () => {
     let config = {theme: 'changedTheme'}
     let oldConfig = {theme: 'default'}
     let c = compileConfig(config, oldConfig)
-    expect(c.theme).to.equal('default')
+    expect(c.theme).to.equal('changedTheme')
   })
   it('should not add a internal route to clientRoutes', () => {
     let config = {
