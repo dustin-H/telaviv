@@ -1,0 +1,479 @@
+
+<!DOCTYPE HTML>
+<html lang="en" >
+    <head>
+        <title>2.1.2 Route · Tel Aviv</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.1.0">
+        <meta name="author" content="Dustin Hoffner">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="telaviv-theme-api.html" />
+    
+    
+    <link rel="prev" href="config.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Read Me
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../GetStarted.html">
+            
+                <a href="../GetStarted.html">
+            
+                    
+                    1. Get Started
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../start/Example.html">
+            
+                <a href="../start/Example.html">
+            
+                    
+                    1.1. Example
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../API.html">
+            
+                <a href="../API.html">
+            
+                    
+                    2. API Reference
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="telaviv.html">
+            
+                <a href="telaviv.html">
+            
+                    
+                    2.1 Telaviv
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="config.html">
+            
+                <a href="config.html">
+            
+                    
+                    2.1.1 Config
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.1.2" data-path="route.html">
+            
+                <a href="route.html">
+            
+                    
+                    2.1.2 Route
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="telaviv-theme-api.html">
+            
+                <a href="telaviv-theme-api.html">
+            
+                    
+                    2.2 Theme API
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >2.1.2 Route</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="route-api-reference">Route API Reference</h1>
+<p>A <code>route</code> is an object which defines a path its content.</p>
+<h2 id="properties">Properties</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Required</th>
+<th>Type</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>path</td>
+<td>true</td>
+<td>String</td>
+<td>-</td>
+</tr>
+<tr>
+<td>internal</td>
+<td>false</td>
+<td>Boolean</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td>html5</td>
+<td>false</td>
+<td>String</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td>amphtml</td>
+<td>false</td>
+<td>String</td>
+<td><code>[]</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="path"><code>path</code></h3>
+<p>The path of the route. Can include parameters.</p>
+<pre><code>/my/route
+/post/:id
+/:language/:postid
+</code></pre><h3 id="internal"><code>internal</code></h3>
+<p>When true the route can only be used as internal error-route and is not reachable directly.</p>
+<h3 id="html5--amphtml"><code>html5</code> / <code>amphtml</code></h3>
+<p>These two properties are defining the content which will be rendered at this route. Both are arrays of <strong>Component-to-DataSource</strong> mappings.</p>
+<ul>
+<li>When the content gets defined only with <code>html5</code>, TelAviv.js will render normal HTML and continue client rendering.</li>
+<li>When the content gets defined only with <code>amphtml</code>, TelAviv.js will render <a href="https://github.com/ampproject/amphtml" _target="blank">AMP HTML</a> and does not continue client rendering. All <a href="https://www.ampproject.org/docs/reference/spec.html" _target="blank">required markup</a> will be included.</li>
+<li>When both properties are set, TelAviv.js will check if HTTP Query <code>req.query.amp === &apos;1&apos;</code>. If so the <code>amphtml</code> content gets rendered. Otherwise <code>html5</code>.</li>
+</ul>
+<blockquote>
+<p>The components used for rendering AMP HTML need to match the AMP HTML Pattern!</p>
+</blockquote>
+<h1 id="component-to-datasource-mapping">Component-to-DataSource Mapping</h1>
+<p>A Component-to-DataSource mapping is a object defining a component and it&apos;s DataSource.</p>
+<h2 id="properties">Properties</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Required</th>
+<th>Type</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>component</td>
+<td>true</td>
+<td>String</td>
+<td>-</td>
+</tr>
+<tr>
+<td>options</td>
+<td>false</td>
+<td>Object</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td>data</td>
+<td>false</td>
+<td>Object</td>
+<td><code>null</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="component"><code>component</code></h3>
+<p>The name of a component defined in your theme.</p>
+<h3 id="options"><code>options</code></h3>
+<p>A custom Object, which will be passed to the component as <code>this.props.options</code>.</p>
+<p>You can pass route-parameters from <code>route.path</code> to this object like this:</p>
+<pre><code class="lang-js"><span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token punctuation">{</span>
+  someParam<span class="token punctuation">:</span> <span class="token string">&apos;:id&apos;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="data"><code>data</code></h3>
+<p>A object defining a DataSource which will get fetched before rendering. The result JSON will be passed to the component as <code>this.props.data</code>.</p>
+<p>At the moment only REST-DataSources are available:</p>
+<pre><code class="lang-js"><span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token punctuation">{</span>
+  type<span class="token punctuation">:</span> <span class="token string">&apos;REST&apos;</span><span class="token punctuation">,</span>
+  url<span class="token punctuation">:</span> <span class="token string">&apos;/api/some/json/endpoint&apos;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>You can pass route-parameters from <code>route.path</code> to the url.</p>
+<pre><code class="lang-js"><span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token punctuation">{</span>
+  type<span class="token punctuation">:</span> <span class="token string">&apos;REST&apos;</span><span class="token punctuation">,</span>
+  url<span class="token punctuation">:</span> <span class="token string">&apos;/api/post/:id&apos;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="route-example">Route example:</h2>
+<pre><code class="lang-js"><span class="token punctuation">{</span>
+  path<span class="token punctuation">:</span> <span class="token string">&apos;/article/:id&apos;</span><span class="token punctuation">,</span>
+  html5<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+    component<span class="token punctuation">:</span> <span class="token string">&apos;StaticHeader&apos;</span><span class="token punctuation">,</span>
+    options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      title<span class="token punctuation">:</span> <span class="token string">&apos;My Header!&apos;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    component<span class="token punctuation">:</span> <span class="token string">&apos;Article&apos;</span><span class="token punctuation">,</span>
+    data<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      type<span class="token punctuation">:</span> <span class="token string">&apos;REST&apos;</span><span class="token punctuation">,</span>
+      url<span class="token punctuation">:</span> <span class="token string">&apos;/api/article/:id&apos;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="config.html" class="navigation navigation-prev " aria-label="Previous page: 2.1.1 Config">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="telaviv-theme-api.html" class="navigation navigation-next " aria-label="Next page: 2.2 Theme API">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"2.1.2 Route","level":"1.3.1.2","depth":3,"next":{"title":"2.2 Theme API","level":"1.3.2","depth":2,"path":"docs/api/telaviv-theme-api.md","ref":"docs/api/telaviv-theme-api.md","articles":[]},"previous":{"title":"2.1.1 Config","level":"1.3.1.1","depth":3,"path":"docs/api/config.md","ref":"docs/api/config.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","anker-enable"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/dustin-H/telaviv/"},"anker-enable":{},"search":{},"lunr":{"maxIndexSize":1000000},"fontsettings":{"theme":"white","family":"sans","size":2},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"base":"https://github.com/dustin-H/telaviv/tree/master","label":"Edit This Page"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Dustin Hoffner","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Tel Aviv","language":"en","gitbook":"3.1.0","description":"Official documentation for Tel Aviv"},"file":{"path":"docs/api/route.md","mtime":"2016-06-20T11:48:21.000Z","type":"markdown"},"gitbook":{"version":"3.1.0","time":"2016-06-24T09:31:32.335Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-anker-enable/anker.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
