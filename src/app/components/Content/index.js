@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Look, { StyleSheet } from 'react-look'
 import _map from 'lodash/map'
 import Loader from '../Loader'
 import * as telaviv from '../../telaviv'

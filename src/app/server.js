@@ -1,24 +1,19 @@
 
 import React from 'react'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
-import { Provider } from 'react-redux'
+import { Provider as ReduxProvider } from 'react-redux'
 import App from './containers/App.js'
 
 import createStore from './store/configureStore.js'
 import createInitialState from './createInitialState.js'
 import { getCache, reset } from '../utils/renderCache.js'
 
+import { createRenderer } from 'fela'
+import { Provider as FelaProvider } from 'react-fela'
+
+import felaConfig from './felaConfig'
+
 import { set, get } from './store/store.js'
-
-import { LookRoot, Presets, StyleSheet } from 'react-look'
-import { plugin, renderToString as lookRenderToString } from 'react-look-server-rendering'
-import { setClassNameScope } from 'react-look-scope'
-
-var serverConfig = Presets['react-dom']
-serverConfig.styleElementId = '_look'
-serverConfig.plugins.push(plugin)
-
-setClassNameScope('g')
 
 export default (data, req, res, config) => {
   /* istanbul ignore if */
@@ -37,17 +32,18 @@ export default (data, req, res, config) => {
     render = renderToString
   }
 
+  const renderer = createRenderer(felaConfig)
+
   const content = render(
-    <LookRoot config={ serverConfig }>
-      <Provider store={ store }>
+    <FelaProvider renderer={ renderer }>
+      <ReduxProvider store={ store }>
         <App />
-      </Provider>
-    </LookRoot>
+      </ReduxProvider>
+    </FelaProvider>
   )
   var cache = getCache()
 
-  // const styles = StyleSheet.renderToString(serverConfig.prefixer)
-  const styles = lookRenderToString(serverConfig.prefixer)
+  const styles = renderer.renderToString()
 
   const newState = store.getState()
 

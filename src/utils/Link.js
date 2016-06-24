@@ -29,7 +29,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 */
 
 import React from 'react'
-import look from 'react-look'
 
 const {bool, object, string, func, oneOfType} = React.PropTypes
 
@@ -150,4 +149,4 @@ const Link = React.createClass({
 
 })
 
-export default look(Link)
+export default Link

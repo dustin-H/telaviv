@@ -1,15 +1,16 @@
 
 import React from 'react'
 import { render } from 'react-dom'
-import { Provider } from 'react-redux'
-import { LookRoot, Presets } from 'react-look'
+import { Provider as ReduxProvider } from 'react-redux'
 
 import createStore from './store/configureStore.js'
 import { ensureComponents } from './loader'
 import { set, get } from './store/store.js'
-import { setClassNameScope } from 'react-look-scope'
 
-setClassNameScope('g')
+import { createRenderer } from 'fela'
+import { Provider as FelaProvider } from 'react-fela'
+
+import felaConfig from './felaConfig'
 
 const store = createStore(__GLOBAL__.INITIAL_STATE || null);
 
@@ -33,12 +34,15 @@ window.onload = function() {
     // Sadly need to do this here, because bable would sort a normal import. Before loading this module the store MUST be initialized! Found no better solution!
     var App = require('./containers/App.js');
 
+    const renderer = createRenderer(felaConfig)
+    const mountNode = document.getElementById('_fela')
+
     render(
-      <LookRoot config={ Presets['react-dom'] }>
-        <Provider store={ store }>
+      <FelaProvider renderer={ renderer } mountNode={ mountNode }>
+        <ReduxProvider store={ store }>
           <App />
-        </Provider>
-      </LookRoot>,
+        </ReduxProvider>
+      </FelaProvider>,
       document.getElementById('app')
     )
   })

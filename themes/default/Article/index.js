@@ -1,9 +1,13 @@
 import React, { PropTypes, Component } from 'react'
-import look, { StyleSheet } from 'react-look'
+import felaStylesConnector from 'fela-styles-connector'
+
+import style from './style.js'
+
+var connect = felaStylesConnector(style)
 
 class Article extends Component {
   render() {
-    const {data, actions} = this.props
+    const {data, actions, styles} = this.props
     this.context.telaviv.setTitle('Article: ' + data.id)
     if (data.id === 'alli') {
       this.context.telaviv.changeLocation('/lol/alligatoah')
@@ -21,9 +25,13 @@ class Article extends Component {
   }
 }
 
-import styleSheet from './style.js'
-var styles = StyleSheet.create(styleSheet)
+Article.contextTypes = {
+  telaviv: React.PropTypes.object
+}
 
-Article.contextTypes = {telaviv: React.PropTypes.object};
 
-export default look(Article)
+import style from './style.js'
+
+var connect = createStylesConnector(style)
+
+export default connect(Article)

@@ -142,8 +142,8 @@ describe('Using the renderReact middleware', () => {
     expect(res.redirect).to.have.been.calledNever
     expect(next).to.have.been.calledOnce
     expect(next.args[0].length).to.equal(0)
-    expect(req.telaviv.renderData.content).to.equal('<div><div class="styles-red-0"></div><div class="styles-blue-0"></div></div>')
-    expect(req.telaviv.renderData.styles).to.equal('.styles-red-0{color:red}.styles-blue-0{color:blue}')
+    expect(req.telaviv.renderData.content).to.equal('<div><div class="c0"></div><div class="c1"></div></div>')
+    expect(req.telaviv.renderData.styles).to.equal('.c0{color:red}.c1{color:blue}')
   })
   it('should render multiple style components in the correct order #2', () => {
     let mid = renderReact(TestUtils.mockRenderReactConfig())
@@ -169,8 +169,8 @@ describe('Using the renderReact middleware', () => {
     expect(res.redirect).to.have.been.calledNever
     expect(next).to.have.been.calledOnce
     expect(next.args[0].length).to.equal(0)
-    expect(req.telaviv.renderData.content).to.equal('<div><div class="styles-blue-0"></div><div class="styles-red-0"></div></div>')
-    expect(req.telaviv.renderData.styles).to.equal('.styles-red-0{color:red}.styles-blue-0{color:blue}')
+    expect(req.telaviv.renderData.content).to.equal('<div><div class="c0"></div><div class="c1"></div></div>')
+    expect(req.telaviv.renderData.styles).to.equal('.c0{color:blue}.c1{color:red}')
   })
   it('should redirect correctly without a code', () => {
     let mid = renderReact(TestUtils.mockRenderReactConfig())

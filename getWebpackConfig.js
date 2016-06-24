@@ -68,14 +68,14 @@ const getConfig = (themesArg, buildArg) => {
       },
       externals: [{
         react: 'var __GLOBAL__.npm.react',
-        'react-look': 'var __GLOBAL__.npm["react-look"]',
+        'react-fela': 'var __GLOBAL__.npm["react-fela"]',
+        'fela-styles-connector': 'var __GLOBAL__.npm["fela-styles-connector"]',
         /*'react/lib/ReactTransitionGroup': 'var __GLOBAL__.npm["react-lib-ReactTransitionGroup"]',
         'react/lib/update': 'var __GLOBAL__.npm["react-lib-update"]',
         'react/lib/ReactComponentWithPureRenderMixin': 'var __GLOBAL__.npm["react-lib-ReactComponentWithPureRenderMixin"]',
         'react/lib/ReactFragment': 'var __GLOBAL__.npm["react-lib-ReactFragment"]',*/
         'react-dom': 'var __GLOBAL__.npm["react-dom"]',
-        superagent: 'var __GLOBAL__.npm["superagent"]',
-        'react-look-scope': 'var __GLOBAL__.npm["react-look-scope"]'
+        superagent: 'var __GLOBAL__.npm["superagent"]'
       }],
       module: {
         loaders: [{

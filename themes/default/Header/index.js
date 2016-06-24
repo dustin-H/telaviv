@@ -1,10 +1,14 @@
 import React, { PropTypes, Component } from 'react'
-import look, { StyleSheet } from 'react-look'
+import felaStylesConnector from 'fela-styles-connector'
+
 import SomeText from './SomeText.js'
+import style from './style.js'
+
+var connect = felaStylesConnector(style)
 
 class Header extends Component {
   render() {
-    const {data, actions} = this.props
+    const {data, actions, styles} = this.props
     return (
       <header className={ styles.header }>
         My Header!<SomeText></SomeText>
@@ -13,7 +17,4 @@ class Header extends Component {
   }
 }
 
-import styleSheet from './style.js'
-var styles = StyleSheet.create(styleSheet)
-
-export default look(Header)
+export default connect(Header)

@@ -6,7 +6,7 @@ export default (config) => {
       data.head += '<script src="/.static/bundle.js" charset="utf-8" async="true"></script>\n'
     }
     if (data.styles != null) {
-      data.head += '<style id="_look" amp-custom>' + data.styles + '</style>\n'
+      data.head += '<style id="_fela" amp-custom>' + data.styles + '</style>\n'
     }
     if (req.telaviv.canonical != null) {
       data.links += '<link rel="canonical" href="' + req.telaviv.canonical + '" />\n'

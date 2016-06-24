@@ -92,7 +92,7 @@ describe('The generateHtml.header middleware', () => {
     mid(req, res, next, data)
 
     expect(data.head).to.be.an('string')
-    expect(data.head).to.equal('<style id="_look" amp-custom>.myStyleClass{color: red}</style>\n')
+    expect(data.head).to.equal('<style id="_fela" amp-custom>.myStyleClass{color: red}</style>\n')
     expect(data.links).to.be.an('string')
     expect(data.links).to.equal('')
     expect(next).to.have.been.calledNever

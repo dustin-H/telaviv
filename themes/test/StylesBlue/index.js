@@ -1,10 +1,13 @@
 import React, { PropTypes, Component } from 'react'
-import look, { StyleSheet } from 'react-look'
-import styleSheet from './style.js'
-var styles = StyleSheet.create(styleSheet)
+import felaStylesConnector from 'fela-styles-connector'
+
+import style from './style.js'
+
+var connect = felaStylesConnector(style)
 
 class StylesBlue extends Component {
   render() {
+    const { styles } = this.props
     return (
       <div className={ styles.div }></div>
     )
@@ -12,4 +15,4 @@ class StylesBlue extends Component {
 }
 
 
-export default look(StylesBlue)
+export default connect(StylesBlue)

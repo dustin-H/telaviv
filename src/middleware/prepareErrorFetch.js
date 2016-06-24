@@ -3,6 +3,8 @@ import matchErrorRoutes from '../router/matchErrorRoutes.js'
 
 export default function(config) {
   return (req, res, next, err) => {
+    console.log(err.stack)
+
     if(typeof err === 'number' && err >= 400 && err < 600){
       res.status(err)
     }

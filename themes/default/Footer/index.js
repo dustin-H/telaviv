@@ -1,9 +1,13 @@
 import React, { PropTypes, Component } from 'react'
-import look, { StyleSheet } from 'react-look'
+import felaStylesConnector from 'fela-styles-connector'
+
+import style from './style.js'
+
+var connect = felaStylesConnector(style)
 
 class Footer extends Component {
   render() {
-    const {data, actions} = this.props
+    const {data, actions, styles} = this.props
     const Link = this.context.telaviv.Link
     return (
       <footer className={ styles.footer }>
@@ -18,9 +22,8 @@ class Footer extends Component {
   }
 }
 
-import styleSheet from './style.js'
-var styles = StyleSheet.create(styleSheet)
+Footer.contextTypes = {
+  telaviv: React.PropTypes.object
+}
 
-Footer.contextTypes = {telaviv: React.PropTypes.object};
-
-export default look(Footer)
+export default connect(Footer)
