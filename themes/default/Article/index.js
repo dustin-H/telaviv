@@ -29,9 +29,4 @@ Article.contextTypes = {
   telaviv: React.PropTypes.object
 }
 
-
-import style from './style.js'
-
-var connect = createStylesConnector(style)
-
 export default connect(Article)

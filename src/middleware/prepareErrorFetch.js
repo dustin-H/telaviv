@@ -3,12 +3,14 @@ import matchErrorRoutes from '../router/matchErrorRoutes.js'
 
 export default function(config) {
   return (req, res, next, err) => {
-    console.log(err.stack)
+    if (err != null && err != undefined && err.stack != null) {
+      console.log(err.stack)
+    }
 
-    if(typeof err === 'number' && err >= 400 && err < 600){
+    if (typeof err === 'number' && err >= 400 && err < 600) {
       res.status(err)
     }
-    if(res.statusCode === 200){
+    if (res.statusCode === 200) {
       res.status(500)
     }
     req.telaviv.fetch = null

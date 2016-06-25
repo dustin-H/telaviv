@@ -1,6 +1,6 @@
 {
   "name": "telaviv",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Node.JS React Frontend Server",
   "main": "lib/app.js",
   "files": [
@@ -89,7 +89,7 @@
     "compression": "^1.6.1",
     "esformatter-jsx": "^7.0.0",
     "fs-extra": "^0.30.0",
-    "istanbul": "^1.0.0-alpha.2",
+    "istanbul": "^0.4.0",
     "mocha": "^2.4.5",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
