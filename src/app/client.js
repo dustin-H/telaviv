@@ -35,7 +35,13 @@ window.onload = function() {
     var App = require('./containers/App.js');
 
     const renderer = createRenderer(felaConfig)
-    const mountNode = document.getElementById('_fela')
+
+
+    //const mountNode = document.getElementById('_fela')
+
+    // Workaround because fela isn't able to reuse styles rendered on the server.
+    const mountNode = document.createElement('style')
+    document.head.appendChild(mountNode)
 
     render(
       <FelaProvider renderer={ renderer } mountNode={ mountNode }>
