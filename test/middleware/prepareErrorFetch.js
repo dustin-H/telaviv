@@ -105,4 +105,22 @@ describe('The prepareErrorFetch middleware', () => {
     expect(next).to.have.been.calledOnce
     expect(next.args[0].length).to.equal(0)
   })
+  it('should not crash while printing a stack trace', () => {
+    let mid = prepareErrorFetch(TestUtils.mockConfigForPrepareErrorFetch('SomeComponent'))
+
+    var req = TestUtils.mockRequestForPrepareErrorFetch('amphtml')
+    var res = TestUtils.mockResponseForPrepareErrorFetch(200)
+    const next = sinon.spy()
+
+    var err = {
+      stack: 'Some Stack Trace!'
+    }
+
+    mid(req, res, next, err)
+
+    expect(res.statusCode).to.equal(500)
+    expect(req.telaviv.fetch).to.be.null
+    expect(next).to.have.been.calledOnce
+    expect(next.args[0].length).to.equal(0)
+  })
 })
