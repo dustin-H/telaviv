@@ -1,6 +1,6 @@
 {
   "name": "telaviv",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Node.JS React Frontend Server",
   "main": "lib/index.js",
   "files": [
@@ -54,11 +54,11 @@
   "dependencies": {
     "async": "^2.0.0-rc.2",
     "express": "^4.13.4",
-    "fela": "^1.0.2",
-    "fela-plugin-fallback-value": "^1.0.2",
-    "fela-plugin-friendly-pseudo-class": "^1.0.2",
-    "fela-plugin-prefixer": "^1.0.2",
-    "fela-plugin-unit": "^1.0.2",
+    "fela": "1.0.3",
+    "fela-plugin-fallback-value": "1.0.3",
+    "fela-plugin-friendly-pseudo-class": "1.0.3",
+    "fela-plugin-prefixer": "1.0.3",
+    "fela-plugin-unit": "1.0.3",
     "history": "^3.0.0",
     "http-status": "^0.2.1",
     "lodash": "^4.0.0",
@@ -87,7 +87,7 @@
     "compression": "^1.6.1",
     "esformatter-jsx": "^7.0.0",
     "fela-styles-connector": "^1.0.2",
-    "fela-stylesheet": "^1.0.2",
+    "fela-stylesheet": "^1.0.3",
     "fs-extra": "^0.30.0",
     "istanbul": "^1.1.0-alpha.1",
     "mocha": "^2.4.5",
