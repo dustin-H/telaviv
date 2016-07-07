@@ -19,7 +19,7 @@ export function changeLocation(to) {
   if (to.substr(0, 7) === 'http://' || to.substr(0, 8) === 'https://') {
     window.location.href = to
   } else {
-    let store = get()
+    //let store = get()
     pushLocation(to)
   }
 }
@@ -27,5 +27,10 @@ export function changeLocation(to) {
 export function isLoading() {
   let store = get()
   let state = store.getState()
-  return state.content.loading || false
+  return state.content.loading || false
+}
+
+export function reload() {
+  let store = get()
+  pushLocation(store.getState().content.location)
 }
