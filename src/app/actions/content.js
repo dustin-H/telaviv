@@ -44,6 +44,6 @@ export function pushLocation(location) {
 export function reload() {
   return (dispatch, getState) => {
     var state = getState()
-    dispatch(pushLocation(state.router.location))
+    dispatch(pushLocation(state.content.location))
   }
 }
