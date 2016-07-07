@@ -2,7 +2,7 @@
 import { get } from '../store/store.js'
 
 import { bindActionCreators } from 'redux'
-import content from '../actions/content.js'
+import * as content from '../actions/content.js'
 
 const { pushLocation, reload } = bindActionCreators(content, get().dispatch)
 
