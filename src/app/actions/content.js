@@ -40,10 +40,3 @@ function setLoading() {
 export function pushLocation(location) {
   history.push(location)
 }
-
-export function reload() {
-  return (dispatch, getState) => {
-    var state = getState()
-    dispatch(pushLocation(state.content.location))
-  }
-}
