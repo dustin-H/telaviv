@@ -1,6 +1,11 @@
 
 import { get } from '../store/store.js'
-import { pushLocation, reload } from '../actions/content.js'
+
+import { bindActionCreators } from 'redux'
+import content from '../actions/content.js'
+
+const { pushLocation, reload } = bindActionCreators(content, get().dispatch)
+
 import Link from '../../utils/Link.js'
 import isActive from './isActive.js'
 
