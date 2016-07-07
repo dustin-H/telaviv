@@ -6,7 +6,6 @@ import * as telaviv from '../../telaviv'
 class Content extends Component {
   getChildContext() {
     telaviv.reload = this.props.actions.content.reload
-    telaviv.pushLocation = this.props.actions.content.pushLocation
     return {
       telaviv: telaviv,
       location: this.props.state.content.location

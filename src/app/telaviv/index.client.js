@@ -1,11 +1,6 @@
 
 import { get } from '../store/store.js'
-
-//import { bindActionCreators } from 'redux'
-//import * as content from '../actions/content.js'
-
-//const { pushLocation, reload } = bindActionCreators(content, get().dispatch)
-
+import { pushLocation } from '../actions/content.js'
 import Link from '../../utils/Link.js'
 import isActive from './isActive.js'
 
@@ -13,7 +8,6 @@ const IS_SERVER = false
 const IS_CLIENT = true
 export { IS_SERVER };
 export { IS_CLIENT };
-export { reload };
 export { Link };
 export { isActive };
 
